@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Computing Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1e40af;
+            --accent-color: #f97316;
+            --success-color: #16a34a;
+            --warning-color: #eab308;
+            --danger-color: #dc2626;
+            --bg-dark: #0f172a;
+            --bg-light: #f8fafc;
+            --border-color: #e2e8f0;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Sticky Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        nav h1 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 1rem;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav-menu a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .nav-menu a.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 1;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        /* Section Styles */
+        section {
+            background: white;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border-left: 5px solid var(--primary-color);
+            scroll-margin-top: 80px;
+        }
+
+        section:nth-child(odd) {
+            border-left-color: var(--accent-color);
+        }
+
+        section:nth-child(3n) {
+            border-left-color: var(--success-color);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        section:nth-child(odd) h2 {
+            color: var(--accent-color);
+        }
+
+        section:nth-child(3n) h2 {
+            color: var(--success-color);
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        /* Learning Content */
+        .learning-box {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(249, 115, 22, 0.05) 100%);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .learning-box h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* Tip Box */
+        .tip-box {
+            background: rgba(16, 185, 129, 0.08);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--success-color);
+        }
+
+        .tip-box h4 {
+            color: var(--success-color);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* Assessment Section */
+        .assessment {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.05) 0%, rgba(245, 158, 11, 0.05) 100%);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2.5rem;
+            border: 2px solid var(--warning-color);
+        }
+
+        .assessment h3 {
+            color: var(--danger-color);
+            border-bottom: 2px solid var(--warning-color);
+        }
+
+        .question-block {
+            background: white;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 6px;
+            border-left: 4px solid var(--warning-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .question-block:hover {
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.1);
+        }
+
+        .question-block.active {
+            background: rgba(220, 38, 38, 0.05);
+        }
+
+        .question-text {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .toggle-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .question-block.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .answer {
+            display: none;
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+
+        .question-block.active .answer {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .multiple-choice {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .choice {
+            padding: 0.75rem 1rem;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .choice:hover {
+            background: var(--bg-light);
+            border-color: var(--primary-color);
+        }
+
+        .choice.correct {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: var(--success-color);
+            color: var(--success-color);
+            font-weight: 600;
+        }
+
+        .choice.incorrect {
+            background: rgba(220, 38, 38, 0.15);
+            border-color: var(--danger-color);
+            color: var(--danger-color);
+            font-weight: 600;
+        }
+
+        /* Feature Box */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(249, 115, 22, 0.08) 100%);
+            padding: 1.5rem;
+            border-radius: 6px;
+            border-top: 3px solid var(--primary-color);
+        }
+
+        .feature-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+        }
+
+        /* Button */
+        button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav h1 {
+                font-size: 1.2rem;
+            }
+
+            .nav-menu {
+                justify-content: center;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            nav {
+                position: static;
+            }
+
+            .answer {
+                display: block !important;
+            }
+
+            section {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        .nav-menu a:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        /* Credits Section */
+        .credits {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(249, 115, 22, 0.05) 100%);
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .credits strong {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Navigation -->
+    <nav>
+        <div class="container" style="max-width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem;">
+            <h1>📚 Basic Computing</h1>
+            <ul class="nav-menu">
+                <li><a href="#section1" class="nav-link">Word Processor</a></li>
+                <li><a href="#section2" class="nav-link">Spreadsheet</a></li>
+                <li><a href="#section3" class="nav-link">Presentation</a></li>
+                <li><a href="#section4" class="nav-link">Web & Email</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Basic Computing Module 1</h1>
+            <p>Master the essential computing skills: word processing, spreadsheets, presentations, and internet navigation.</p>
+        </div>
+
+        <!-- SECTION 1: WORD PROCESSOR -->
+        <section id="section1">
+            <h2>📝 Competency 1: Operate a Word Processor</h2>
+            
+            <h3>Overview</h3>
+            <p>Learn to use word processing software effectively to create, format, and manage documents. This competency covers everything from basic text entry to advanced document manipulation.</p>
+            
+            <div class="learning-box">
+                <h4>Learning Objectives</h4>
+                <p>By the end of this section, you will be able to:</p>
+                <ul>
+                    <li>Understand basic word processing principles and terminology</li>
+                    <li>Use keyboard and mouse commands efficiently</li>
+                    <li>Create, format, and manipulate documents</li>
+                    <li>Manage printer settings and troubleshoot errors</li>
+                    <li>Implement proper file management and security procedures</li>
+                </ul>
+            </div>
+
+            <h3>Basic Principles & Terminology</h3>
+            <p>Word processing is the use of computer software to create, edit, format, and print documents. Key terminology includes:</p>
+            <ul>
+                <li><strong>Document:</strong> A file containing text and formatting</li>
+                <li><strong>Formatting:</strong> The appearance of text (font, size, style)</li>
+                <li><strong>Cursor:</strong> The blinking line showing where text will appear</li>
+                <li><strong>Selection:</strong> Highlighted text ready for editing</li>
+                <li><strong>Template:</strong> A pre-designed document format</li>
+            </ul>
+
+            <h3>Keyboard & Mouse Commands</h3>
+            <p>Mastering keyboard shortcuts improves your productivity significantly:</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>File Management</h4>
+                    <p><strong>Ctrl + N:</strong> New document<br><strong>Ctrl + O:</strong> Open<br><strong>Ctrl + S:</strong> Save<br><strong>Ctrl + P:</strong> Print</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Text Editing</h4>
+                    <p><strong>Ctrl + X:</strong> Cut<br><strong>Ctrl + C:</strong> Copy<br><strong>Ctrl + V:</strong> Paste<br><strong>Ctrl + Z:</strong> Undo</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Selection</h4>
+                    <p><strong>Ctrl + A:</strong> Select all<br><strong>Shift + Arrow:</strong> Select text<br><strong>Double-click:</strong> Select word</p>
+                </div>
+            </div>
+
+            <h3>Document Formatting</h3>
+            <p>Formatting makes your documents visually appealing and professional:</p>
+            <ul>
+                <li><strong>Line Formatting:</strong> Spacing between lines (single, 1.5, double)</li>
+                <li><strong>Paragraph Formatting:</strong> Indentation, alignment (left, center, right, justify), spacing</li>
+                <li><strong>Document Formatting:</strong> Page size, margins, headers/footers</li>
+                <li><strong>Font Selection:</strong> Font type (Arial, Times New Roman), size (12pt, 14pt), style (bold, italic, underline)</li>
+                <li><strong>Tabulation:</strong> Setting tabs for organized alignment of text</li>
+            </ul>
+
+            <h3>Document Manipulation</h3>
+            <p>Essential editing techniques include:</p>
+            <ul>
+                <li><strong>Move:</strong> Cut text from one location and paste to another</li>
+                <li><strong>Copy:</strong> Duplicate text without removing the original</li>
+                <li><strong>Insert:</strong> Add new content at cursor position</li>
+                <li><strong>Delete:</strong> Remove selected text</li>
+                <li><strong>Find & Replace:</strong> Locate specific text and replace it throughout the document</li>
+                <li><strong>Spelling Check:</strong> Identify and correct spelling errors</li>
+                <li><strong>Grammar Check:</strong> Identify grammatical issues (where available)</li>
+            </ul>
+
+            <div class="tip-box">
+                <h4>💡 Pro Tip</h4>
+                <p>Use Find & Replace (Ctrl + H) to make bulk changes quickly. For example, replacing all instances of "Mr." with "Mr" across your document saves time and ensures consistency.</p>
+            </div>
+
+            <h3>Screen Display Options</h3>
+            <p>Control your workspace to maximize productivity:</p>
+            <ul>
+                <li><strong>Zoom:</strong> Adjust view percentage (50%, 100%, 200%) for comfortable reading</li>
+                <li><strong>View Modes:</strong> Normal, Page Layout, Outline, Web Layout</li>
+                <li><strong>Ruler:</strong> Display/hide rulers for precise measurement</li>
+                <li><strong>Toolbars:</strong> Customize which tools are visible</li>
+                <li><strong>Print Preview:</strong> See how your document will look when printed</li>
+            </ul>
+
+            <h3>Printer Management</h3>
+            <p>Proper printer use ensures successful document output:</p>
+            <ul>
+                <li>Check paper and ink levels before printing</li>
+                <li>Identify common hardware faults (paper jam, low toner)</li>
+                <li>Understand error messages (offline, driver issues)</li>
+                <li>Configure print settings (pages, copies, color/B&W)</li>
+            </ul>
+
+            <h3>File Management & Security</h3>
+            <p>Proper file organization prevents data loss:</p>
+            <ul>
+                <li><strong>Save:</strong> Use Ctrl + S frequently to preserve changes</li>
+                <li><strong>Save As:</strong> Create new versions or change file location</li>
+                <li><strong>Naming:</strong> Use descriptive file names (e.g., "Report_2024_Final")</li>
+                <li><strong>Folders:</strong> Organize files in logical directory structures</li>
+                <li><strong>Backup:</strong> Keep copies of important files</li>
+            </ul>
+
+            <div class="credits">
+                <strong>Credits:</strong> 5 | <strong>Theory Hours:</strong> 10 | <strong>Practical Hours:</strong> 40
+            </div>
+
+            <!-- Assessment for Section 1 -->
+            <div class="assessment">
+                <h3>Assessment Exercises - Word Processor</h3>
+                
+                <div class="question-block" onclick="toggleAnswer(this)">
+                    <div class="question-text">
+                        <span>1. What is the keyboard shortcut to save a document?</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Answer:</strong> Ctrl + S (or Cmd + S on Mac)</p>
+                        <p><strong>Explanation:</strong> This is the standard save shortcut in most word processors and saves any changes to your document.</p>
+                    </div>
+                </div>
+
+                <div class="question-block" onclick="toggleAnswer(this)">
+                    <div class="question-text">
+                        <span>2. List three text manipulation techniques you can use in a word processor.</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Answer:</strong> Any three of:</p>
+                        <ul>
+                            <li>Move (cut and paste)</li>
+                            <li>Copy</li>
+                            <li>Insert new text</li>
+                            <li>Delete</li>
+                            <li>Find & Replace</li>
+                            <li>Undo/Redo</li>
+                        </ul>
+                        <p><strong>Explanation:</strong> These are essential techniques for editing and modifying documents efficiently.</p>
+                    </div>
+                </div>
+
+                <div class="question-block" onclick="toggleAnswer(this)">
+                    <div class="question-text">
+                        <span>3. What does the Print Preview function allow you to do?</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Answer:</strong> Print Preview allows you to see how your document will appear when printed before actually printing it.</p>
+                        <p><strong>Explanation:</strong> This helps you identify formatting issues, ensure proper page breaks, and avoid wasting paper on incorrect prints.</p>
+                    </div>
+                </div>
+
+                <div class="question-block" onclick="toggleAnswer(this)">
+                    <div class="question-text">
+                        <span>4. Multiple Choice: Which of the following is NOT a type of document formatting?</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <div class="multiple-choice">
+                            <div class="choice" onclick="checkAnswer(event, false)">A) Line spacing</div>
+                            <div class="choice" onclick="checkAnswer(event, false)">B) Font size</div>
+                            <div class="choice" onclick="checkAnswer(event, true)">C) Document compilation ✓</div>
+                            <div class="choice" onclick="checkAnswer(event, false)">D) Paragraph alignment</div>
+                        </div>
+                        <p style="margin-top: 1rem;"><strong>Explanation:</strong> Document compilation is not a standard formatting option. The other three are all document formatting features.</p>
+                    </div>
+                </div>
+
+                <div class="question-block" onclick="toggleAnswer(this)">
+                    <div class="question-text">
+                        <span>5. Practical Exercise: Create and format a document</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Task:</strong></p>
+                        <ul>
+                            <li>Open a word processor</li>
+                            <li>Type a paragraph about your favorite hobby (minimum 100 words)</li>
+                            <li>Apply three different formatting techniques:
+                                <ul>
+                                    <li>Change at least two sections to bold</li>
+                                    <li>Italicize one phrase</li>
+                                    <li>Change paragraph alignment to center for the title</li>
+                                </ul>
+                            </li>
+                            <li>Save the document with a descriptive name</li>
+                            <li>Use Find & Replace to change one word throughout the document</li>
+                        </ul>
+                        <p><strong>Assessment Criteria:</strong> Document shows proper use of formatting techniques, file is saved correctly, and find & replace was applied successfully.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: SPREADSHEET -->
+        <section id="section2">
+            <h2>📊 Competency 2: Create and Use a Simple Spreadsheet</h2>
+            
+            <h3>Overview</h3>
+            <p>Learn to design, create, and use spreadsheets to solve real-world problems. Spreadsheets are powerful tools for organizing data, performing calculations, and visualizing information.</p>
+            
+            <div class="learning-box">
+                <h4>Learning Objectives</h4>
+                <p>By the end of this section, you will be able to:</p>
+                <ul>
+                    <li>Plan a spreadsheet solution for a given problem</li>
+                    <li>Enter and format data effectively</li>
+                    <li>Create and use formulas and functions</li>
+                    <li>Generate graphs and charts</li>
+                    <li>Save and modify spreadsheets</li>
+                </ul>
+            </div>
+
+            <h3>Planning a Spreadsheet</h3>
+            <p>Before creating a spreadsheet, proper planning ensures your solution will be effective:</p>
+            <ul>
+                <li><strong>Define the Purpose:</strong> What problem are you solving? What question are you answering?</li>
+                <li><strong>Identify Data:</strong> What information do you need? Where will it come from?</li>
+                <li><strong>Determine Layout:</strong> How will you organize rows and columns?</li>
+                <li><strong>Plan Calculations:</strong> What formulas or functions will you need?</li>
+                <li><strong>Design Output:</strong> How will you present the results? (tables, charts, reports)</li>
+            </ul>
+
+            <div class="tip-box">
+                <h4>💡 Planning Tip</h4>
+                <p>Sketch your spreadsheet on paper first! Draw the column headers, identify where data will go, and note which cells need formulas. This prevents errors and saves time during creation.</p>
+            </div>
+
+            <h3>Spreadsheet Components</h3>
+            <p>Understanding the basic structure is essential:</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Cells</h4>
+                    <p>Individual boxes in the grid where data is stored. Identified by column letter and row number (e.g., A1, B5).</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Rows</h4>
+                    <p>Horizontal lines of cells numbered 1, 2, 3, etc. Use for data entries.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Columns</h4>
+                    <p>Vertical lines of cells labeled A, B, C, etc. Use to categorize information.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Formulas</h4>
+                    <p>Mathematical expressions that calculate values based on cell data.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Functions</h4>
+                    <p>Pre-built calculations like SUM, AVERAGE, MAX, MIN.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Charts</h4>
+                    <p>Visual representations of data (bar, line, pie charts).</p>
+                </div>
+            </div>
+
+            <h3>Data Entry & Formatting</h3>
+            <p>Proper data entry ensures accuracy and professionalism:</p>
+            <ul>
+                <li><strong>Text Entry:</strong> Type labels and descriptions in cells</li>
+                <li><strong>Number Entry:</strong> Input numerical values for calculations</li>
+                <li><strong>Cell Width:</strong> Adjust column width to display content fully</li>
+                <li><strong>Alignment:</strong> Left, center, or right align text for clarity</li>
+                <li><strong>Number Format:</strong> Display numbers as currency ($), percentages (%), decimals (0.00), or integers</li>
+                <li><strong>Text Format:</strong> Apply font styles (bold, italic) to highlight important information</li>
+            </ul>
+
+            <h3>Formulas & Functions</h3>
+            <p>Formulas perform calculations automatically:</p>
+            <ul>
+                <li><strong>Basic Arithmetic:</strong>
+                    <ul>
+                        <li>Add: =A1+B1</li>
+                        <li>Subtract: =A1-B1</li>
+                        <li>Multiply: =A1*B1</li>
+                        <li>Divide: =A1/B1</li>
+                    </ul>
+                </li>
+                <li><strong>Common Functions:</strong>
+                    <ul>
+                        <li>=SUM(A1:A10) — Adds cells A1 through A10</li>
+                        <li>=AVERAGE(A1:A10) — Calculates the average</li>
+                        <li>=MAX(A1:A10) — Finds the highest value</li>
+                        <li>=MIN(A1:A10) — Finds the lowest value</li>
+                        <li>=COUNT(A1:A10) — Counts number entries</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Creating Graphs & Charts</h3>
+            <p>Visualizations make data easier to understand:</p>
+            <ul>
+                <li><strong>Step 1:</strong> Select the data range you want to visualize</li>
+                <li><strong>Step 2:</strong> Insert a chart (usually via Insert menu)</li>
+                <li><strong>Step 3:</strong> Choose chart type:
+                    <ul>
+                        <li>Bar Chart: Compare categories</li>
+                        <li>Line Chart: Show trends over time</li>
+                        <li>Pie Chart: Show proportions/percentages</li>
+                        <li>Column Chart: Similar to bar, with vertical columns</li>
+                    </ul>
+                </li>
+                <li><strong>Step 4:</strong> Add title and labels for clarity</li>
+            </ul>
+
+            <h3>Saving & Using Spreadsheets</h3>
+            <p>Manage your spreadsheets effectively:</p>
+            <ul>
+                <li><strong>Save:</strong> Use Ctrl + S to save your work frequently</li>
+                <li><strong>File Name:</strong> Use descriptive names (e.g., "Sales_Q4_2024")</li>
+                <li><strong>File Format:</strong> Save as .xlsx (Excel) for compatibility</li>
+                <li><strong>Modify:</strong> Open saved files, change variables, and recalculate automatically</li>
+                <li><strong>Print:</strong> Print as hard copy or export as PDF</li>
+            </ul>
+
+            <div class="credits">
+                <strong>Credits:</strong> 5 | <strong>Theory Hours:</strong> 10 | <strong>Practical Hours:</strong> 40
+            </div>
+
+            <!-- Assessment for Section 2 -->
+            <div class="assessment">
+                <h3>Assessment Exercises - Spreadsheet</h3>
+                
+                <div class="question-block" onclick="toggleAnswer(this)">
+                    <div class="question-text">
+                        <span>1. What is the purpose of planning before creating a spreadsheet?</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Answer:</strong> Planning ensures you:</p>
+                        <ul>
+                            <li>Understand the problem you're solving</li>
+                            <li>Organize data logically</li>
+                            <li>Include necessary formulas and calculations</li>
+                            <li>Create an effective solution efficiently</li>
+                        </ul>
+                        <p><strong>Explanation:</strong> Good planning prevents mistakes and saves time during creation.</p>
+                    </div>
+                </div>
+
+                <div class="question-block" onclick="toggleAnswer(this)">
+                    <div class="question-text">
+                        <span>2. Write a formula to calculate the average of cells B1 through B10.</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Answer:</strong> =AVERAGE(B1:B10)</p>
+                        <p><strong>Explanation:</strong> The AVERAGE function calculates the mean of the specified range. The colon (:) indicates a range from B1 to B10 inclusive.</p>
+                    </div>
+                </div>
+
+                <div class="question-block" onclick="toggleAnswer(this)">
+                    <div class="question-text">
+                        <span>3. What are two ways to apply a formula to multiple cells?</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Answer:</strong> Two common methods:</p>
+                        <ul>
+                            <li><strong>Fill Down:</strong> Enter formula in first cell, select range, use Ctrl + D</li>
+                            <li><strong>Drag Formula:</strong> Click cell with formula, drag the small square in bottom-right corner down to desired cells</li>
+                        </ul>
+                        <p><strong>Explanation:</strong> Both methods copy the formula and adjust cell references automatically.</p>
+                    </div>
+                </div>
+
+                <div class="question-block" onclick="toggleAnswer(this)">
+                    <div class="question-text">
+                        <span>4. Multiple Choice: Which chart type is best for showing a trend over time?</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <div class="multiple-choice">
+                            <div class="choice" onclick="checkAnswer(event, false)">A) Pie Chart</div>
+                            <div class="choice" onclick="checkAnswer(event, true)">B) Line Chart ✓</div>
+                            <div class="choice" onclick="checkAnswer(event, false)">C) Donut Chart</div>
+                            <div class="choice" onclick="checkAnswer(event, false)">D) Scatter Plot</div>
+                        </div>
+                        <p style="margin-top: 1rem;"><strong>Explanation:</strong> Line charts are ideal for showing trends, changes, and progression over time because they clearly display the direction and rate of change.</p>
+                    </div>
+                </div>
+
+                <div class="question-block" onclick="toggleAnswer(this)">
+                    <div class="question-text">
+                        <span>5. Practical Exercise: Create a student grade spreadsheet</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Task:</strong></p>
+                        <ol>
+                            <li>Create a spreadsheet with the following structure:
+                                <ul>
+                                    <li>Column A: Student names (minimum 5 students)</li>
+                                    <li>Column B: Math test scores</li>
+                                    <li>Column C: English test scores</li>
+                                    <li>Column D: Science test scores</li>
+                                </ul>
+                            </li>
+                            <li>Add formulas in Column E to calculate the average for each student</li>
+                            <li>Add a summary row below data showing:
+                                <ul>
+                                    <li>Maximum score for each subject</li>
+                                    <li>Average score for each subject</li>
+                                </ul>
+                            </li>
+                            <li>Format the spreadsheet:
+                                <ul>
+                                    <li>Bold the header row</li>
+                                    <li>Display scores with one decimal place</li>
+                                </ul>
+                            </li>
+                            <li>Create a bar chart comparing average scores by subject</li>
+                            <li>Save the file as "Student_Grades"</li>
+                        </ol>
+                        <p><strong>Assessment Criteria:</strong> Correct data entry, proper formulas, accurate calculations, professional formatting, and functional chart.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: PRESENTATION -->
+        <section id="section3">
+            <h2>🎤 Competency 3: Use Computer Technology for Presentations</h2>
+            
+            <h3>Overview</h3>
+            <p>Learn to design, create, and deliver professional presentations using computer software. Presentations are essential for communicating information effectively to audiences.</p>
+            
+            <div class="learning-box">
+                <h4>Learning Objectives</h4>
+                <p>By the end of this section, you will be able to:</p>
+                <ul>
+                    <li>Design effective presentations for specific audiences</li>
+                    <li>Gather and organize relevant information</li>
+                    <li>Create visually appealing slides</li>
+                    <li>Deliver presentations confidently</li>
+                    <li>Use presentation software features effectively</li>
+                </ul>
+            </div>
+
+            <h3>Planning Your Presentation</h3>
+            <p>Successful presentations start with careful planning:</p>
+            <ul>
+                <li><strong>Topic:</strong> Choose a clear, focused subject</li>
+                <li><strong>Purpose:</strong> What do you want the audience to learn or do?</li>
+                <li><strong>Target Audience:</strong> Who are you presenting to? (students, colleagues, clients)</li>
+                <li><strong>Method:</strong> How will you present? (in-person, online, hybrid)</li>
+                <li><strong>Duration:</strong> How much time do you have?</li>
+                <li><strong>Resources:</strong> What software and tools will you use?</li>
+            </ul>
+
+            <div class="tip-box">
+                <h4>💡 Planning Tip</h4>
+                <p>Use the "Rule of Three": Organize your presentation into three main points or sections. This helps audiences remember your key messages and makes structure clear.</p>
+            </div>
+
+            <h3>Gathering & Organizing Information</h3>
+            <p>Quality content is crucial for effective presentations:</p>
+            <ul>
+                <li><strong>Research:</strong> Find reliable sources (books, websites, academic journals)</li>
+                <li><strong>Relevance:</strong> Ensure all information relates to your topic and audience</li>
+                <li><strong>Accuracy:</strong> Verify facts and data are correct</li>
+                <li><strong>Organization:</strong> Arrange information logically (chronological, problem-solution, cause-effect)</li>
+                <li><strong>Summary:</strong> Provide clear takeaways and conclusions</li>
+            </ul>
+
+            <h3>Presentation Design</h3>
+            <p>Visual design significantly impacts audience engagement:</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Layout & Structure</h4>
+                    <p>Use consistent templates. Keep slides uncluttered with adequate white space for readability.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Color Scheme</h4>
+                    <p>Choose 2-3 complementary colors. Ensure high contrast between text and background.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Typography</h4>
+                    <p>Use readable fonts (sans-serif preferred). Maintain consistent sizing: titles larger than body text.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Visual Elements</h4>
+                    <p>Include relevant images, charts, and diagrams. Avoid excessive animations that distract.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Content Balance</h4>
+                    <p>Follow the "6x6 rule": maximum 6 bullets per slide, 6 words per bullet.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Consistency</h4>
+                    <p>Maintain consistent styling across all slides for a professional appearance.</p>
+                </div>
+            </div>
+
+            <h3>Creating Slides</h3>
+            <p>Best practices for slide creation:</p>
+            <ul>
+                <li><strong>Title Slide:</strong> Include presentation title, your name, date, and institution</li>
+                <li><strong>Content Slides:</strong> One main idea per slide, with supporting details</li>
+                <li><strong>Bullet Points:</strong> Use short phrases, not full sentences</li>
+                <li><strong>Visual Hierarchy:</strong> Make important information more prominent</li>
+                <li><strong>Transitions:</strong> Use subtle transitions between slides (avoid excessive effects)</li>
+                <li><strong>Speaker Notes:</strong> Include detailed notes for reference during presentation</li>
+            </ul>
+
+            <h3>Presentation Software</h3>
+            <p>Common tools and their features:</p>
+            <ul>
+                <li><strong>Microsoft PowerPoint:</strong> Industry standard with extensive formatting options</li>
+                <li><strong>Google Slides:</strong> Cloud-based, collaborative, accessible from any device</li>
+                <li><strong>Apple Keynote:</strong> Mac-based with elegant design templates</li>
+                <li><strong>LibreOffice Impress:</strong> Free, open-source alternative</li>
+            </ul>
+
+            <h3>Delivering Your Presentation</h3>
+            <p>Effective delivery enhances your message:</p>
+            <ul>
+                <li><strong>Practice:</strong> Rehearse multiple times to build confidence</li>
+                <li><strong>Timing:</strong> Know your pacing; don't rush or speak too slowly</li>
+                <li><strong>Eye Contact:</strong> Look at different audience members</li>
+                <li><strong>Body Language:</strong> Stand confidently, use natural gestures</li>
+                <li><strong>Voice:</strong> Speak clearly, vary tone to maintain interest</li>
+                <li><strong>Interaction:</strong> Engage audience with questions or discussions</li>
+                <li><strong>Backup Plan:</strong> Have printed slides in case of technical issues</li>
+            </ul>
+
+            <div class="credits">
+                <strong>Credits:</strong> 5 | <strong>Theory Hours:</strong> 10 | <strong>Practical Hours:</strong> 40
+            </div>
+
+            <!-- Assessment for Section 3 -->
+            <div class="assessment">
+                <h3>Assessment Exercises - Presentation</h3>
+                
+                <div class="question-block" onclick="toggleAnswer(this)">
+                    <div class="question-text">
+                        <span>1. What are the three key planning elements before creating a presentation?</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Answer:</strong> The three key elements are:</p>
+                        <ol>
+                            <li><strong>Topic:</strong> The subject matter</li>
+                            <li><strong>Purpose:</strong> What you want the audience to learn</li>
+                            <li><strong>Target Audience:</strong> Who you're presenting to</li>
+                        </ol>
+                        <p><strong>Explanation:</strong> These elements guide all other decisions about content, design, and delivery.</p>
+                    </div>
+                </div>
+
+                <div class="question-block" onclick="toggleAnswer(this)">
+                    <div class="question-text">
+                        <span>2. What is the "6x6 Rule" in presentation design?</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Answer:</strong> Maximum 6 bullet points per slide with maximum 6 words per bullet point.</p>
+                        <p><strong>Explanation:</strong> This rule prevents slides from becoming cluttered and ensures the audience isn't overwhelmed with text. It encourages concise messaging and keeps focus on your verbal delivery.</p>
+                    </div>
+                </div>
+
+                <div class="question-block" onclick="toggleAnswer(this)">
+                    <div class="question-text">
+                        <span>3. Name three key elements to consider when checking information for relevance.</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Answer:</strong> Three elements to consider:</p>
+                        <ul>
+                            <li><strong>Topic Relevance:</strong> Does the information relate to your topic?</li>
+                            <li><strong>Purpose Alignment:</strong> Does it support your presentation's purpose?</li>
+                            <li><strong>Audience Appropriateness:</strong> Is it suitable and interesting for your target audience?</li>
+                        </ul>
+                        <p><strong>Explanation:</strong> Relevant information keeps your presentation focused and engaging for your specific audience.</p>
+                    </div>
+                </div>
+
+                <div class="question-block" onclick="toggleAnswer(this)">
+                    <div class="question-text">
+                        <span>4. Multiple Choice: Which is NOT recommended for effective slide design?</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <div class="multiple-choice">
+                            <div class="choice" onclick="checkAnswer(event, false)">A) Consistent color scheme</div>
+                            <div class="choice" onclick="checkAnswer(event, false)">B) High contrast between text and background</div>
+                            <div class="choice" onclick="checkAnswer(event, true)">C) Filling slides with as much text as possible ✓</div>
+                            <div class="choice" onclick="checkAnswer(event, false)">D) Using readable fonts</div>
+                        </div>
+                        <p style="margin-top: 1rem;"><strong>Explanation:</strong> Crowded slides with excessive text are hard to read, distract from your presentation, and violate the 6x6 rule. Less text is better.</p>
+                    </div>
+                </div>
+
+                <div class="question-block" onclick="toggleAnswer(this)">
+                    <div class="question-text">
+                        <span>5. Practical Exercise: Create a presentation on a computing topic</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Task:</strong></p>
+                        <ol>
+                            <li>Choose a computing topic (e.g., "Cybersecurity Basics," "Artificial Intelligence," "Cloud Computing")</li>
+                            <li>Plan your presentation:
+                                <ul>
+                                    <li>Define topic, purpose, and target audience</li>
+                                    <li>Outline main points (3-5 sections)</li>
+                                </ul>
+                            </li>
+                            <li>Create a presentation with minimum 8 slides:
+                                <ul>
+                                    <li>Slide 1: Title slide with topic, name, date</li>
+                                    <li>Slides 2-6: Content slides (one point each)</li>
+                                    <li>Slide 7: Summary/Key Takeaways</li>
+                                    <li>Slide 8: Q&A or Conclusion</li>
+                                </ul>
+                            </li>
+                            <li>Apply consistent design:
+                                <ul>
+                                    <li>Use professional color scheme (2-3 colors)</li>
+                                    <li>Readable fonts (title and body fonts)</li>
+                                    <li>Include at least 2 relevant images or charts</li>
+                                </ul>
+                            </li>
+                            <li>Add speaker notes to each content slide</li>
+                            <li>Practice delivering the presentation (time yourself)</li>
+                        </ol>
+                        <p><strong>Assessment Criteria:</strong> Clear topic and purpose, relevant information, professional design, proper use of software features, and effective delivery.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: WEB & EMAIL -->
+        <section id="section4">
+            <h2>🌐 Competency 4: Use a Browser and Email</h2>
+            
+            <h3>Overview</h3>
+            <p>Master internet navigation and email communication. These skills are essential for research, information gathering, and digital communication in today's world.</p>
+            
+            <div class="learning-box">
+                <h4>Learning Objectives</h4>
+                <p>By the end of this section, you will be able to:</p>
+                <ul>
+                    <li>Launch and navigate web browsers effectively</li>
+                    <li>Use search engines with basic and advanced techniques</li>
+                    <li>Understand and use hyperlinks</li>
+                    <li>Send and receive emails with attachments</li>
+                    <li>Configure email settings</li>
+                </ul>
+            </div>
+
+            <h3>Web Browsers</h3>
+            <p>A web browser is software that displays web pages from the internet. Popular browsers include:</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Google Chrome</h4>
+                    <p>Fast, user-friendly, syncs across devices, strong security.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Mozilla Firefox</h4>
+                    <p>Open-source, privacy-focused, excellent customization.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Safari</h4>
+                    <p>Mac/iOS native browser, fast, good battery performance.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Microsoft Edge</h4>
+                    <p>Modern browser, integrates with Windows, fast performance.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Opera</h4>
+                    <p>Lightweight, built-in VPN, good for slower connections.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Brave</h4>
+                    <p>Privacy-focused, blocks ads and trackers by default.</p>
+                </div>
+            </div>
+
+            <h3>Browser Navigation</h3>
+            <p>Essential browser controls:</p>
+            <ul>
+                <li><strong>Address Bar:</strong> Type URL (e.g., www.google.com) to visit websites</li>
+                <li><strong>Back Button:</strong> Return to previously visited pages</li>
+                <li><strong>Forward Button:</strong> Move forward after using back button</li>
+                <li><strong>Home Button:</strong> Return to your browser's home page</li>
+                <li><strong>Refresh/Reload:</strong> Reload the current page (F5 or Ctrl+R)</li>
+                <li><strong>Stop Button:</strong> Stop loading a page</li>
+                <li><strong>Bookmarks/Favorites:</strong> Save frequently visited websites for quick access</li>
+                <li><strong>History:</strong> View previously visited websites</li>
+                <li><strong>Search Bar:</strong> Search directly from the browser</li>
+            </ul>
+
+            <h3>URL Structure</h3>
+            <p>Understanding URLs helps you navigate effectively:</p>
+            <ul>
+                <li><strong>Protocol:</strong> https:// (secure) or http:// (less secure)</li>
+                <li><strong>Domain:</strong> The website name (example.com)</li>
+                <li><strong>Path:</strong> Specific page or resource (/products/item)</li>
+                <li><strong>Example:</strong> https://www.example.com/products/item</li>
+            </ul>
+
+            <h3>Search Engines</h3>
+            <p>Search engines help you find information online. Popular options include:</p>
+            <ul>
+                <li><strong>Google:</strong> Largest search engine, comprehensive results</li>
+                <li><strong>Bing:</strong> Microsoft search engine, integration with Windows</li>
+                <li><strong>Yahoo:</strong> Directory-based search, news integration</li>
+                <li><strong>DuckDuckGo:</strong> Privacy-focused, no tracking</li>
+            </ul>
+
+            <h3>Search Techniques</h3>
+            <p>Effective searching saves time and improves results:</p>
+            <ul>
+                <li><strong>Simple Search:</strong> Single word or short phrase
+                    <ul>
+                        <li>Example: "healthy recipes"</li>
+                    </ul>
+                </li>
+                <li><strong>Phrase Search:</strong> Put exact phrase in quotes for exact matches
+                    <ul>
+                        <li>Example: "climate change impact"</li>
+                    </ul>
+                </li>
+                <li><strong>Boolean Operators:</strong> Use AND, OR, NOT to refine searches
+                    <ul>
+                        <li>AND: "machine learning AND Python"</li>
+                        <li>OR: "Python OR Java" (either term)</li>
+                        <li>NOT: "smartphones NOT iPhones"</li>
+                    </ul>
+                </li>
+                <li><strong>Advanced Search:</strong> Most search engines offer advanced search options
+                    <ul>
+                        <li>Search by date range</li>
+                        <li>Search specific websites</li>
+                        <li>Search by file type (PDF, DOC)</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Hyperlinks</h3>
+            <p>Hyperlinks connect different web pages and resources:</p>
+            <ul>
+                <li><strong>Definition:</strong> Clickable elements linking to other content</li>
+                <li><strong>Text Links:</strong> Highlighted text (usually blue and underlined)</li>
+                <li><strong>Image Links:</strong> Clickable images</li>
+                <li><strong>Email Links:</strong> Links that open your email client</li>
+                <li><strong>Types:</strong>
+                    <ul>
+                        <li>Internal links: Navigate within the same website</li>
+                        <li>External links: Navigate to different websites</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Email Fundamentals</h3>
+            <p>Email is essential for digital communication:</p>
+            <ul>
+                <li><strong>Email Client:</strong> Software for sending/receiving emails (Outlook, Gmail, Thunderbird)</li>
+                <li><strong>Email Address:</strong> Unique identifier (username@domain.com)</li>
+                <li><strong>Inbox:</strong> Folder receiving incoming messages</li>
+                <li><strong>Outbox:</strong> Folder holding messages before sending</li>
+                <li><strong>Sent Items:</strong> Archive of messages you've sent</li>
+            </ul>
+
+            <h3>Composing & Sending Emails</h3>
+            <p>Best practices for effective email communication:</p>
+            <ul>
+                <li><strong>To:</strong> Primary recipient's email address</li>
+                <li><strong>Cc:</strong> Carbon copy (recipient can see others copied)</li>
+                <li><strong>Bcc:</strong> Blind carbon copy (hidden from other recipients)</li>
+                <li><strong>Subject:</strong> Clear, descriptive subject line</li>
+                <li><strong>Body:</strong> Professional message with proper greeting and closing</li>
+                <li><strong>Attachments:</strong> Add files by clicking attachment icon</li>
+                <li><strong>Signature:</strong> Auto-add your contact information</li>
+            </ul>
+
+            <div class="tip-box">
+                <h4>💡 Email Etiquette</h4>
+                <p>Always use a professional tone, proofread before sending, respond within 24 hours, and use appropriate formality for your relationship with the recipient.</p>
+            </div>
+
+            <h3>Email Features</h3>
+            <p>Useful email configuration options:</p>
+            <ul>
+                <li><strong>Signature File:</strong> Automatic footer added to all emails</li>
+                <li><strong>Read Receipts:</strong> Confirm when recipient opens your email</li>
+                <li><strong>Auto-Reply:</strong> Automatic response when away</li>
+                <li><strong>Folders/Labels:</strong> Organize emails by topic or sender</li>
+                <li><strong>Filters/Rules:</strong> Automatically sort incoming mail</li>
+                <li><strong>Contacts/Address Book:</strong> Store frequently used email addresses</li>
+            </ul>
+
+            <div class="credits">
+                <strong>Credits:</strong> 4 | <strong>Theory Hours:</strong> 5 | <strong>Practical Hours:</strong> 35
+            </div>
+
+            <!-- Assessment for Section 4 -->
+            <div class="assessment">
+                <h3>Assessment Exercises - Web & Email</h3>
+                
+                <div class="question-block" onclick="toggleAnswer(this)">
+                    <div class="question-text">
+                        <span>1. Define a web browser and list its main purpose.</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Answer:</strong> A web browser is software that displays web pages from the internet. Its main purpose is to access, view, and navigate information on the World Wide Web.</p>
+                        <p><strong>Explanation:</strong> Browsers interpret HTML code and render it as viewable pages that users can interact with.</p>
+                    </div>
+                </div>
+
+                <div class="question-block" onclick="toggleAnswer(this)">
+                    <div class="question-text">
+                        <span>2. Explain the difference between AND, OR, and NOT Boolean operators in searching.</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Answer:</strong></p>
+                        <ul>
+                            <li><strong>AND:</strong> Results must contain both terms (narrows search)</li>
+                            <li><strong>OR:</strong> Results contain either term (expands search)</li>
+                            <li><strong>NOT:</strong> Excludes a specific term from results (narrows search)</li>
+                        </ul>
+                        <p><strong>Examples:</strong></p>
+                        <ul>
+                            <li>"Python AND programming" - Results contain both words</li>
+                            <li>"Java OR JavaScript" - Results contain either language</li>
+                            <li>"programming NOT games" - Results exclude gaming references</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="question-block" onclick="toggleAnswer(this)">
+                    <div class="question-text">
+                        <span>3. List three browser controls and their functions.</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Answer:</strong> Any three of:</p>
+                        <ul>
+                            <li><strong>Back Button:</strong> Returns to previously visited page</li>
+                            <li><strong>Forward Button:</strong> Goes to next page after using back</li>
+                            <li><strong>Refresh Button:</strong> Reloads current page</li>
+                            <li><strong>Home Button:</strong> Returns to browser's home page</li>
+                            <li><strong>Bookmarks:</strong> Saves frequently visited sites</li>
+                            <li><strong>History:</strong> Shows previously visited pages</li>
+                        </ul>
+                        <p><strong>Explanation:</strong> These controls make navigation efficient and organized.</p>
+                    </div>
+                </div>
+
+                <div class="question-block" onclick="toggleAnswer(this)">
+                    <div class="question-text">
+                        <span>4. Multiple Choice: What is the purpose of the BCC (Blind Carbon Copy) field in email?</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <div class="multiple-choice">
+                            <div class="choice" onclick="checkAnswer(event, false)">A) To send copies to recipients who can see other recipients</div>
+                            <div class="choice" onclick="checkAnswer(event, true)">B) To send copies to recipients without revealing them to other recipients ✓</div>
+                            <div class="choice" onclick="checkAnswer(event, false)">C) To mark email as important</div>
+                            <div class="choice" onclick="checkAnswer(event, false)">D) To create a backup of the email</div>
+                        </div>
+                        <p style="margin-top: 1rem;"><strong>Explanation:</strong> BCC keeps recipient addresses hidden from other recipients, useful for privacy and mass communications.</p>
+                    </div>
+                </div>
+
+                <div class="question-block" onclick="toggleAnswer(this)">
+                    <div class="question-text">
+                        <span>5. Practical Exercise: Browser navigation and email proficiency</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Task A - Browser Navigation:</strong></p>
+                        <ol>
+                            <li>Open a web browser</li>
+                            <li>Search for "information technology careers" using a search engine</li>
+                            <li>Visit at least 3 different websites from the search results</li>
+                            <li>Use the back button to navigate between sites</li>
+                            <li>Bookmark your favorite page</li>
+                            <li>Use advanced search to find specific information (e.g., salary data)</li>
+                        </ol>
+                        <p><strong>Task B - Email Communication:</strong></p>
+                        <ol>
+                            <li>Compose an email to your instructor with:
+                                <ul>
+                                    <li>Professional subject line</li>
+                                    <li>Proper greeting and closing</li>
+                                    <li>2-3 paragraphs of content</li>
+                                    <li>An attachment (document, PDF, or image)</li>
+                                </ul>
+                            </li>
+                            <li>Include a signature file with your contact information</li>
+                            <li>Save a draft before sending (optional)</li>
+                            <li>Send the email</li>
+                            <li>Review your sent items folder to confirm delivery</li>
+                        </ol>
+                        <p><strong>Assessment Criteria:</strong> Effective use of browser controls, successful search execution, proper email composition, professional formatting, and successful file attachment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Completion Section -->
+        <section style="background: linear-gradient(135deg, rgba(22, 163, 74, 0.08) 0%, rgba(37, 99, 235, 0.08) 100%); border-left-color: var(--success-color);">
+            <h2 style="color: var(--success-color);">🎓 Congratulations!</h2>
+            <p>You have completed the Basic Computing Module 1 tutorial! You've learned essential skills in:</p>
+            <ul>
+                <li>✅ Word Processing</li>
+                <li>✅ Spreadsheet Creation & Use</li>
+                <li>✅ Presentation Design & Delivery</li>
+                <li>✅ Web Navigation & Email Communication</li>
+            </ul>
+            <p style="margin-top: 1.5rem; font-size: 1.05rem;"><strong>Next Steps:</strong> Review the assessment exercises for each section, practice your new skills regularly, and explore advanced features of the software you've learned to use. Good luck in your computing journey!</p>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Basic Computing Module 1 Tutorial. All rights reserved.</p>
+            <p>Created based on the official syllabus for comprehensive learning and skill development.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation highlighting
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Toggle answer visibility
+        function toggleAnswer(element) {
+            element.classList.toggle('active');
+        }
+
+        // Check multiple choice answers
+        function checkAnswer(event, isCorrect) {
+            event.stopPropagation();
+            const choice = event.target;
+            
+            // Remove previous selection
+            choice.parentElement.querySelectorAll('.choice').forEach(c => {
+                c.classList.remove('correct', 'incorrect');
+            });
+            
+            if (isCorrect) {
+                choice.classList.add('correct');
+            } else {
+                choice.classList.add('incorrect');
+            }
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
