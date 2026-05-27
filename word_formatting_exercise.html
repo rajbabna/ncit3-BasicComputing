@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MS Word Text Formatting Exercise</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background: #f0f4f8;
+      color: #1a202c;
+      padding: 40px 20px;
+    }
+
+    .page-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* ── Header banner ── */
+    .banner {
+      background: linear-gradient(135deg, #4a1d96, #7c3aed);
+      color: #fff;
+      border-radius: 12px 12px 0 0;
+      padding: 28px 36px 22px;
+    }
+    .banner h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: .5px;
+      margin-bottom: 4px;
+    }
+    .banner p { font-size: .92rem; opacity: .85; }
+
+    /* ── Task legend ── */
+    .legend {
+      background: #ede9fe;
+      border-left: 4px solid #7c3aed;
+      padding: 18px 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 10px 24px;
+    }
+    .legend h2 {
+      grid-column: 1 / -1;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #4a1d96;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+    }
+    .task-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .88rem;
+      color: #3b0764;
+    }
+    .task-badge {
+      background: #7c3aed;
+      color: #fff;
+      font-size: .72rem;
+      font-weight: 700;
+      border-radius: 4px;
+      padding: 2px 7px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── Main content card ── */
+    .card {
+      background: #fff;
+      border: 1px solid #ddd6fe;
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+      padding: 36px 40px 40px;
+    }
+
+    /* ── Section blocks ── */
+    .section { margin-bottom: 32px; }
+
+    .section-label {
+      display: inline-block;
+      background: #7c3aed;
+      color: #fff;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    .instruction {
+      font-size: .82rem;
+      color: #6d28d9;
+      background: #f5f3ff;
+      border: 1px dashed #c4b5fd;
+      border-radius: 6px;
+      padding: 8px 14px;
+      margin-bottom: 12px;
+      font-family: Arial, sans-serif;
+    }
+    .instruction strong { color: #4a1d96; }
+
+    /* ── Passage text ── */
+    .passage {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: #1a202c;
+      background: #fafafa;
+      border: 1px solid #e9d5ff;
+      border-radius: 6px;
+      padding: 16px 20px;
+    }
+
+    /* Tab-stop demo */
+    .tab-table {
+      font-family: "Courier New", monospace;
+      font-size: .93rem;
+      line-height: 2;
+      color: #1a202c;
+      background: #fafafa;
+      border: 1px solid #e9d5ff;
+      border-radius: 6px;
+      padding: 14px 20px;
+    }
+    .tab-table span { display: inline-block; }
+    .col1 { width: 200px; }
+    .col2 { width: 160px; }
+    .col3 { width: 160px; }
+
+    /* Tip box */
+    .tip {
+      margin-top: 28px;
+      background: #fef3c7;
+      border-left: 4px solid #f59e0b;
+      border-radius: 6px;
+      padding: 14px 18px;
+      font-size: .85rem;
+      color: #78350f;
+      font-family: Arial, sans-serif;
+    }
+    .tip strong { color: #92400e; }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid #e9d5ff;
+      margin: 28px 0;
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- Banner -->
+  <div class="banner">
+    <h1>MS Word Text Formatting Exercise</h1>
+    <p>Follow each task below. Copy the sample text into a new Word document and apply the formatting as instructed.</p>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <h2>Tasks covered in this exercise</h2>
+    <div class="task-item"><span class="task-badge">T1</span><span><strong>Line Spacing</strong> — single, 1.5×, double</span></div>
+    <div class="task-item"><span class="task-badge">T2</span><span><strong>Paragraph</strong> — indent, alignment, spacing</span></div>
+    <div class="task-item"><span class="task-badge">T3</span><span><strong>Document</strong> — page size, margins, headers/footers</span></div>
+    <div class="task-item"><span class="task-badge">T4</span><span><strong>Font</strong> — typeface, size, bold/italic/underline</span></div>
+    <div class="task-item"><span class="task-badge">T5</span><span><strong>Tabulation</strong> — setting and using tab stops</span></div>
+    <div class="task-item"><span class="task-badge">T6</span><span><strong>Page Breaks</strong> — insert a manual page break</span></div>
+    <div class="task-item"><span class="task-badge">T7</span><span><strong>Find &amp; Replace</strong> — locate and swap a word</span></div>
+  </div>
+
+  <!-- Card -->
+  <div class="card">
+
+    <!-- T3: Document setup -->
+    <div class="section">
+      <span class="section-label">Task T3 — Document Setup</span>
+      <div class="instruction">
+        <strong>Before you begin:</strong> Set the page to <strong>A4</strong>, all margins to <strong>2.5 cm</strong>. Add a <strong>header</strong> with the text <em>"Wonderland Formatting Practice"</em> and a <strong>footer</strong> showing the page number centred.
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- T4 + T1: Title & line spacing -->
+    <div class="section">
+      <span class="section-label">Task T4 — Font &amp; T1 — Line Spacing</span>
+      <div class="instruction">
+        Type or paste the <strong>title</strong> below. Format it as: <strong>Times New Roman, 18 pt, Bold, Centred</strong>.<br>
+        For the <strong>body paragraph</strong> that follows, use <strong>Arial 12 pt</strong> and set line spacing to <strong>Double</strong>.
+      </div>
+      <div class="passage">
+        <p style="text-align:center; font-size:1.15rem; font-weight:700; margin-bottom:14px;">
+          Down the Rabbit Hole
+        </p>
+        <p>
+          Alice sat near the riverbank feeling quite bored, when suddenly a white rabbit wearing a tiny waistcoat rushed past muttering urgently. She leapt to her feet and chased it straight to a dark hole beneath an old oak tree. Without a single sensible thought she tumbled in, falling slowly through shelves of jam jars, dusty clocks, and curious paintings until she landed softly far below in a long, dimly lit corridor lined with locked wooden doors of every possible size.
+        </p>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- T2: Paragraph formatting -->
+    <div class="section">
+      <span class="section-label">Task T2 — Paragraph Formatting</span>
+      <div class="instruction">
+        Apply the following to the paragraph below:
+        <ul style="margin-top:6px; margin-left:18px; line-height:1.9;">
+          <li>Alignment: <strong>Justified</strong></li>
+          <li>First-line indent: <strong>1.25 cm</strong></li>
+          <li>Spacing before paragraph: <strong>6 pt</strong> &nbsp;|&nbsp; Spacing after: <strong>12 pt</strong></li>
+          <li>Line spacing: <strong>1.5 lines</strong></li>
+        </ul>
+      </div>
+      <div class="passage">
+        <p>
+          On a small glass table she discovered a golden key and a bottle labelled <em>Drink Me</em> in neat handwriting. After much hesitation Alice drank it, shrinking rapidly until the great doors towered above her. She soon found a tiny cake marked <em>Eat Me</em> and nibbled carefully, hoping it might restore her height. Nothing about this underground world followed the ordinary rules she had been taught, and she began to wonder whether sensible rules had ever truly mattered at all.
+        </p>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- T4: Bold / Italic / Underline -->
+    <div class="section">
+      <span class="section-label">Task T4 — Bold, Italic &amp; Underline</span>
+      <div class="instruction">
+        In the paragraph below, apply formatting exactly as marked:
+        <ul style="margin-top:6px; margin-left:18px; line-height:1.9;">
+          <li>Make the words in <strong>[bold]</strong> → <strong>Bold</strong></li>
+          <li>Make the words in <em>[italic]</em> → <em>Italic</em></li>
+          <li>Make the words in <u>[underline]</u> → <u>Underline</u></li>
+        </ul>
+      </div>
+      <div class="passage">
+        <p>
+          The [bold]Mad Hatter[/bold] poured tea into a chipped cup and slid it across the table without asking. The [italic]March Hare[/italic] nodded in a very serious manner and declared that there was [underline]always more room[/underline] at a table that never ended. Alice sat down cautiously. She could not decide whether the [bold]conversation[/bold] was [italic]entirely nonsense[/italic] or whether it [underline]made a strange kind of sense[/underline] that she had not yet learned.
+        </p>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- T5: Tabulation -->
+    <div class="section">
+      <span class="section-label">Task T5 — Tabulation</span>
+      <div class="instruction">
+        Set three <strong>left tab stops</strong> at <strong>4 cm</strong>, <strong>8 cm</strong>, and <strong>12 cm</strong>. Then type the table below using the <kbd>Tab</kbd> key to align each column. The first row should be <strong>Bold</strong>.
+      </div>
+      <div class="tab-table">
+        <div><span class="col1"><strong>Character</strong></span><span class="col2"><strong>Location</strong></span><span class="col3"><strong>Notable Trait</strong></span></div>
+        <div><span class="col1">Alice</span><span class="col2">Rabbit Hole</span><span class="col3">Curious</span></div>
+        <div><span class="col1">White Rabbit</span><span class="col2">Meadow</span><span class="col3">Always Late</span></div>
+        <div><span class="col1">Mad Hatter</span><span class="col2">Tea Garden</span><span class="col3">Eccentric</span></div>
+        <div><span class="col1">Cheshire Cat</span><span class="col2">Forest</span><span class="col3">Mysterious</span></div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- T6: Page break -->
+    <div class="section">
+      <span class="section-label">Task T6 — Page Break</span>
+      <div class="instruction">
+        Place the cursor <strong>before</strong> the paragraph below and insert a <strong>manual page break</strong> (<kbd>Ctrl</kbd>+<kbd>Enter</kbd> on Windows / <kbd>⌘</kbd>+<kbd>Enter</kbd> on Mac) so this section starts on a new page.
+      </div>
+      <div class="passage">
+        <p>
+          The Queen of Hearts strode across the croquet lawn shouting orders at everyone in sight. Her soldiers, who were ordinary playing cards bent awkwardly into hoops, tried their best to remain still. Alice watched the game proceed with growing confusion, for no rule seemed fixed and the Queen changed them whenever it suited her. Despite all this, Alice stood her ground calmly, deciding that a queen who shouted so very much could not possibly be as frightening as she first appeared.
+        </p>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- T7: Find & Replace -->
+    <div class="section">
+      <span class="section-label">Task T7 — Find &amp; Replace</span>
+      <div class="instruction">
+        Use <strong>Find &amp; Replace</strong> (<kbd>Ctrl</kbd>+<kbd>H</kbd>) to replace every instance of the word <strong>"curious"</strong> with <strong>"peculiar"</strong> throughout your document.
+      </div>
+    </div>
+
+    <!-- Tip -->
+    <div class="tip">
+      <strong>💡 Pro Tip:</strong> Use the <strong>Styles panel</strong> (Home tab → Styles) to apply consistent heading and body formatting across your document. Once you have finished all tasks, save the file as <strong>formatting_exercise.docx</strong>.
+    </div>
+
+  </div><!-- /card -->
+</div><!-- /page-wrapper -->
+</body>
+</html>
