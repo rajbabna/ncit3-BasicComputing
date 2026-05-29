@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Computing Exam Paper</title>
+    <style>
+        :root {
+            --primary: #1a3a52;
+            --secondary: #2c5aa0;
+            --accent: #ff6b35;
+            --light-bg: #f8f9fa;
+            --border: #e0e0e0;
+            --text: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Garamond', serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .toolbar {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .toolbar button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-print {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-print:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(44, 90, 160, 0.3);
+        }
+
+        .btn-download {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-download:hover {
+            background: #ff5a1f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 60px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            animation: slideUp 0.6s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 30px;
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .exam-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            font-size: 14px;
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .detail-value {
+            flex: 1;
+            border-bottom: 1px dotted var(--border);
+            margin: 0 10px;
+        }
+
+        .instructions {
+            background: linear-gradient(135deg, rgba(44, 90, 160, 0.08) 0%, rgba(255, 107, 53, 0.08) 100%);
+            border-left: 4px solid var(--secondary);
+            padding: 20px;
+            margin: 40px 0;
+            border-radius: 6px;
+        }
+
+        .instructions h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .instructions ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .instructions li {
+            padding-left: 25px;
+            margin-bottom: 10px;
+            position: relative;
+            font-size: 14px;
+        }
+
+        .instructions li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            margin: 50px 0;
+            page-break-inside: avoid;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .section-meta {
+            font-size: 13px;
+            opacity: 0.95;
+        }
+
+        .section-content {
+            background: var(--light-bg);
+            padding: 25px;
+            border-radius: 0 0 8px 8px;
+            border: 1px solid var(--border);
+            border-top: none;
+        }
+
+        .section-instruction {
+            font-size: 13px;
+            color: var(--secondary);
+            font-style: italic;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .question-block {
+            margin-bottom: 30px;
+            background: white;
+            padding: 18px;
+            border-radius: 6px;
+            border-left: 3px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .question-block:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transform: translateX(2px);
+        }
+
+        .question-text {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .option {
+            padding: 8px 0 8px 30px;
+            font-size: 14px;
+            margin-bottom: 6px;
+            position: relative;
+        }
+
+        .option:before {
+            content: "○";
+            position: absolute;
+            left: 8px;
+            color: var(--secondary);
+        }
+
+        .short-answer-space {
+            border: 1px dashed var(--border);
+            padding: 15px;
+            margin-top: 12px;
+            min-height: 80px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .structured-question {
+            background: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        .sq-title {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .sq-marks {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .sq-content {
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .sq-part {
+            margin-left: 20px;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .sq-part-label {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .answer-box {
+            border: 1px dashed var(--border);
+            padding: 20px;
+            margin-top: 15px;
+            min-height: 100px;
+            background: rgba(44, 90, 160, 0.02);
+            border-radius: 4px;
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px solid var(--border);
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .page-break {
+            page-break-after: always;
+            margin-bottom: 60px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .toolbar {
+                display: none;
+            }
+
+            .container {
+                max-width: 100%;
+                box-shadow: none;
+                padding: 40px;
+                border-radius: 0;
+            }
+
+            .section-header {
+                page-break-inside: avoid;
+            }
+
+            .question-block {
+                page-break-inside: avoid;
+            }
+
+            .structured-question {
+                page-break-inside: avoid;
+            }
+
+            .short-answer-space {
+                min-height: 100px;
+            }
+
+            .answer-box {
+                min-height: 120px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+
+            .toolbar {
+                position: static;
+                margin-bottom: 20px;
+                justify-content: center;
+            }
+
+            .title {
+                font-size: 24px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+
+            .exam-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+        <button class="btn-print" onclick="window.print()">🖨️ Print</button>
+        <button class="btn-download" onclick="downloadHTML()">⬇️ Download</button>
+    </div>
+
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="title">EXAMINATION PAPER</div>
+            <div class="subtitle">Basic Computing (Module 1)</div>
+            <div class="exam-details">
+                <div class="detail-item">
+                    <span class="detail-label">Duration:</span>
+                    <span class="detail-value"></span>
+                    <strong>2 hours</strong>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Total Marks:</span>
+                    <span class="detail-value"></span>
+                    <strong>100</strong>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Date:</span>
+                    <span class="detail-value"></span>
+                    <strong>______________</strong>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Candidate Name:</span>
+                    <span class="detail-value"></span>
+                    <strong>______________</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- INSTRUCTIONS -->
+        <div class="instructions">
+            <h3>⚙️ INSTRUCTIONS TO CANDIDATES</h3>
+            <ul>
+                <li>Answer ALL questions in this paper.</li>
+                <li>This examination paper is divided into three sections: Multiple Choice, Short Answer, and Structured Questions.</li>
+                <li>Clearly show all your work and reasoning, especially in short answer and structured questions.</li>
+                <li>Write your answers in the spaces provided or on separate sheets as instructed.</li>
+                <li>The use of calculators is permitted where appropriate.</li>
+            </ul>
+        </div>
+
+        <!-- SECTION A: MULTIPLE CHOICE -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">📋 SECTION A: MULTIPLE CHOICE QUESTIONS</div>
+                <div class="section-meta">30 marks | 30 mins</div>
+            </div>
+            <div class="section-content">
+                <div class="section-instruction">Select the correct answer (A, B, C, or D) for each question.</div>
+
+                <div class="question-block">
+                    <div class="question-text">1. Which of the following is NOT a function of a word processor?</div>
+                    <div class="option">A) Creating and formatting documents</div>
+                    <div class="option">B) Performing complex mathematical calculations</div>
+                    <div class="option">C) Checking spelling and grammar</div>
+                    <div class="option">D) Managing file storage</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">2. What does the 'Find and Replace' function in a word processor allow you to do?</div>
+                    <div class="option">A) Find errors automatically</div>
+                    <div class="option">B) Search for specific text and replace it with other text</div>
+                    <div class="option">C) Delete all instances of a word</div>
+                    <div class="option">D) Format all text at once</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">3. In a spreadsheet, what is a cell?</div>
+                    <div class="option">A) A row in the spreadsheet</div>
+                    <div class="option">B) A column in the spreadsheet</div>
+                    <div class="option">C) The intersection of a row and column</div>
+                    <div class="option">D) A formula used for calculations</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">4. Which of the following spreadsheet functions would you use to find the total of values in cells A1 to A10?</div>
+                    <div class="option">A) AVERAGE(A1:A10)</div>
+                    <div class="option">B) MAX(A1:A10)</div>
+                    <div class="option">C) SUM(A1:A10)</div>
+                    <div class="option">D) COUNT(A1:A10)</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">5. What is the primary purpose of a web browser?</div>
+                    <div class="option">A) To create documents</div>
+                    <div class="option">B) To access and display web pages on the internet</div>
+                    <div class="option">C) To send emails</div>
+                    <div class="option">D) To organize files</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">6. Which of the following is a search engine?</div>
+                    <div class="option">A) Mozilla Firefox</div>
+                    <div class="option">B) Google</div>
+                    <div class="option">C) Microsoft Word</div>
+                    <div class="option">D) Adobe Reader</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">7. What is a hyperlink?</div>
+                    <div class="option">A) A type of formatting in documents</div>
+                    <div class="option">B) A clickable element that connects to another webpage or resource</div>
+                    <div class="option">C) A spelling checker</div>
+                    <div class="option">D) A printer setting</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">8. Which key combination is commonly used to save a document in most applications?</div>
+                    <div class="option">A) Ctrl+S</div>
+                    <div class="option">B) Ctrl+P</div>
+                    <div class="option">C) Ctrl+X</div>
+                    <div class="option">D) Ctrl+Z</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">9. What does URL stand for?</div>
+                    <div class="option">A) Universal Resource Link</div>
+                    <div class="option">B) Uniform Resource Locator</div>
+                    <div class="option">C) Universal Retrieval Location</div>
+                    <div class="option">D) Uniform Request List</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">10. In email software, what is an attachment?</div>
+                    <div class="option">A) A signature line in an email</div>
+                    <div class="option">B) A forwarded email</div>
+                    <div class="option">C) A file sent along with an email message</div>
+                    <div class="option">D) A hyperlink in an email</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">11. Which of the following is an example of a cell reference in a spreadsheet?</div>
+                    <div class="option">A) 5 + 3</div>
+                    <div class="option">B) A1</div>
+                    <div class="option">C) ROW1</div>
+                    <div class="option">D) CELL1</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">12. What does the 'Undo' function do in a word processor?</div>
+                    <div class="option">A) Deletes the entire document</div>
+                    <div class="option">B) Reverses the last action performed</div>
+                    <div class="option">C) Saves the document</div>
+                    <div class="option">D) Restarts the application</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">13. Which term describes the process of arranging text into columns and rows?</div>
+                    <div class="option">A) Merging</div>
+                    <div class="option">B) Formatting</div>
+                    <div class="option">C) Tabulation</div>
+                    <div class="option">D) Alignment</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">14. What is the purpose of a spell checker in a word processor?</div>
+                    <div class="option">A) To replace words randomly</div>
+                    <div class="option">B) To identify and correct spelling errors</div>
+                    <div class="option">C) To change font sizes</div>
+                    <div class="option">D) To print documents</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">15. In a spreadsheet, what would the formula =B5*2 do?</div>
+                    <div class="option">A) Add 2 to cell B5</div>
+                    <div class="option">B) Divide cell B5 by 2</div>
+                    <div class="option">C) Multiply the value in cell B5 by 2</div>
+                    <div class="option">D) Subtract B5 from 2</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">16. What is the purpose of the 'Print Preview' feature?</div>
+                    <div class="option">A) To print multiple copies</div>
+                    <div class="option">B) To see how a document will look before printing</div>
+                    <div class="option">C) To select a printer</div>
+                    <div class="option">D) To change paper size</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">17. Which of the following best describes formatting in word processing?</div>
+                    <div class="option">A) Saving a document with a new name</div>
+                    <div class="option">B) Changing the appearance of text and document layout</div>
+                    <div class="option">C) Creating a new document</div>
+                    <div class="option">D) Sending a document via email</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">18. What does the 'maximize' button on a window do?</div>
+                    <div class="option">A) Closes the window</div>
+                    <div class="option">B) Makes the window full screen</div>
+                    <div class="option">C) Reduces the window size</div>
+                    <div class="option">D) Freezes the application</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">19. Which of the following is a browser control used to return to a previously visited webpage?</div>
+                    <div class="option">A) Home button</div>
+                    <div class="option">B) Stop button</div>
+                    <div class="option">C) Back button</div>
+                    <div class="option">D) Refresh button</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">20. What is a Boolean operator in search engines?</div>
+                    <div class="option">A) A type of webpage</div>
+                    <div class="option">B) A method to combine search terms (AND, OR, NOT)</div>
+                    <div class="option">C) A printer setting</div>
+                    <div class="option">D) An email protocol</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">21. Which file format is commonly used for saving spreadsheets?</div>
+                    <div class="option">A) .doc</div>
+                    <div class="option">B) .pdf</div>
+                    <div class="option">C) .xlsx</div>
+                    <div class="option">D) .html</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">22. What is the function of a 'customized dictionary' in word processing?</div>
+                    <div class="option">A) To replace text automatically</div>
+                    <div class="option">B) To add or remove words from the spell checker</div>
+                    <div class="option">C) To change font styles</div>
+                    <div class="option">D) To save document templates</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">23. In a spreadsheet, what does the AVERAGE function calculate?</div>
+                    <div class="option">A) The sum of values</div>
+                    <div class="option">B) The mean value of a range</div>
+                    <div class="option">C) The maximum value</div>
+                    <div class="option">D) The number of values</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">24. Which of the following describes the function of 'Favorites' or 'Bookmarks' in a browser?</div>
+                    <div class="option">A) To clear browsing history</div>
+                    <div class="option">B) To save frequently visited websites for quick access</div>
+                    <div class="option">C) To block certain websites</div>
+                    <div class="option">D) To increase browsing speed</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">25. What is the primary difference between a local search and a global search?</div>
+                    <div class="option">A) Local is faster, global is slower</div>
+                    <div class="option">B) Local searches within a specific area/region, global searches worldwide</div>
+                    <div class="option">C) They are the same thing</div>
+                    <div class="option">D) Local requires an account, global does not</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">26. What is the purpose of a 'signature file' in email software?</div>
+                    <div class="option">A) To sign documents digitally</div>
+                    <div class="option">B) To create an automatic message ending added to emails</div>
+                    <div class="option">C) To verify sender identity</div>
+                    <div class="option">D) To encrypt emails</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">27. In a presentation, what is a slide layout?</div>
+                    <div class="option">A) The order of slides</div>
+                    <div class="option">B) The design template that defines the position of content on a slide</div>
+                    <div class="option">C) The animation of slides</div>
+                    <div class="option">D) The file format of the presentation</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">28. Which of the following is considered a manipulation technique in word processing?</div>
+                    <div class="option">A) Changing font color</div>
+                    <div class="option">B) Setting margins</div>
+                    <div class="option">C) Move, copy, or delete text</div>
+                    <div class="option">D) Adjusting zoom level</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">29. What does PDF stand for?</div>
+                    <div class="option">A) Personal Document Format</div>
+                    <div class="option">B) Portable Document Format</div>
+                    <div class="option">C) Program Data File</div>
+                    <div class="option">D) Primary Display Format</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">30. Which of the following is the correct order when planning a simple spreadsheet solution?</div>
+                    <div class="option">A) Create – Plan – Use</div>
+                    <div class="option">B) Use – Plan – Create</div>
+                    <div class="option">C) Plan – Create – Use</div>
+                    <div class="option">D) Plan – Use – Create</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- SECTION B: SHORT ANSWER -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">✏️ SECTION B: SHORT ANSWER QUESTIONS</div>
+                <div class="section-meta">25 marks | 30 mins</div>
+            </div>
+            <div class="section-content">
+                <div class="section-instruction">Answer all five questions in the spaces provided. Show relevant working where applicable.</div>
+
+                <div class="question-block">
+                    <div class="question-text">1. Explain the difference between 'cut' and 'copy' functions in a word processor. In what situations would you use each? (5 marks)</div>
+                    <div class="short-answer-space">__________________________________________________________________<br><br>__________________________________________________________________<br><br>__________________________________________________________________</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">2. Describe three different ways to format text in a document (e.g., font, size, style). What is the purpose of formatting? (5 marks)</div>
+                    <div class="short-answer-space">__________________________________________________________________<br><br>__________________________________________________________________<br><br>__________________________________________________________________</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">3. Explain what a cell reference is in a spreadsheet and provide an example of how it would be used in a formula. (5 marks)</div>
+                    <div class="short-answer-space">__________________________________________________________________<br><br>__________________________________________________________________<br><br>__________________________________________________________________</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">4. What are the advantages of using a web browser's bookmarks/favorites feature? How would you organize them effectively? (5 marks)</div>
+                    <div class="short-answer-space">__________________________________________________________________<br><br>__________________________________________________________________<br><br>__________________________________________________________________</div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">5. Describe the steps you would take to send an email with an attached document. (5 marks)</div>
+                    <div class="short-answer-space">__________________________________________________________________<br><br>__________________________________________________________________<br><br>__________________________________________________________________</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- SECTION C: STRUCTURED QUESTIONS -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">📊 SECTION C: STRUCTURED QUESTIONS</div>
+                <div class="section-meta">45 marks | 60 mins</div>
+            </div>
+            <div class="section-content">
+                <div class="section-instruction">Answer all questions. Show all work and provide detailed explanations.</div>
+
+                <!-- Question 1 -->
+                <div class="structured-question">
+                    <div class="sq-title">Question 1: Word Processing and Document Management</div>
+                    <div class="sq-marks">Total Marks: 22</div>
+                    
+                    <div class="sq-part">
+                        <span class="sq-part-label">a) Create a professional business letter using word processing skills. Include:</span>
+                        <div style="margin-top: 10px;">
+                            <div class="sq-part">i. A proper letterhead with your name and contact information <span style="color: var(--accent);">(2 marks)</span></div>
+                            <div class="sq-part">ii. A formal greeting and closing <span style="color: var(--accent);">(1 mark)</span></div>
+                            <div class="sq-part">iii. At least 2 paragraphs of body text with clear formatting <span style="color: var(--accent);">(2 marks)</span></div>
+                            <div class="sq-part">iv. Proper margins and document layout <span style="color: var(--accent);">(2 marks)</span></div>
+                        </div>
+                        <div class="answer-box"></div>
+                    </div>
+
+                    <div class="sq-part">
+                        <span class="sq-part-label">b) Using the document you created above, explain how you would:</span>
+                        <div style="margin-top: 10px;">
+                            <div class="sq-part">i. Use 'Find and Replace' to change all instances of a company name throughout the document <span style="color: var(--accent);">(3 marks)</span></div>
+                            <div class="sq-part">ii. Check the document for spelling and grammar errors <span style="color: var(--accent);">(2 marks)</span></div>
+                            <div class="sq-part">iii. Prepare the document for printing, including checking printer settings <span style="color: var(--accent);">(2 marks)</span></div>
+                        </div>
+                        <div class="answer-box"></div>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="structured-question">
+                    <div class="sq-title">Question 2: Spreadsheet Problem-Solving</div>
+                    <div class="sq-marks">Total Marks: 23</div>
+                    
+                    <div class="sq-content">
+                        <strong>Scenario:</strong> You are asked to create a simple spreadsheet to track quarterly sales data for a small business. The business sells three products (A, B, and C) and needs to analyze sales performance across four quarters.
+                    </div>
+
+                    <div class="sq-part">
+                        <span class="sq-part-label">a) Planning the Spreadsheet:</span>
+                        <div style="margin-top: 10px;">
+                            <div class="sq-part">i. Sketch or describe the structure of your spreadsheet with rows and columns <span style="color: var(--accent);">(2 marks)</span></div>
+                            <div class="sq-part">ii. List what data you would enter and what calculations you would include <span style="color: var(--accent);">(3 marks)</span></div>
+                        </div>
+                        <div class="answer-box"></div>
+                    </div>
+
+                    <div class="sq-part">
+                        <span class="sq-part-label">b) Creating the Spreadsheet:</span>
+                        <div style="margin-top: 10px;">
+                            <div class="sq-part">i. Enter sample data for sales of each product in each quarter <span style="color: var(--accent);">(3 marks)</span></div>
+                            <div class="sq-part">ii. Create formulas to calculate: total sales per product, total sales per quarter, and overall total <span style="color: var(--accent);">(4 marks)</span></div>
+                            <div class="sq-part">iii. Format the spreadsheet with appropriate column widths, alignment, and number formats <span style="color: var(--accent);">(1 mark)</span></div>
+                        </div>
+                        <div class="answer-box"></div>
+                    </div>
+
+                    <div class="sq-part">
+                        <span class="sq-part-label">c) Using the Spreadsheet:</span>
+                        <div style="margin-top: 10px;">
+                            <div class="sq-part">i. Create a graph showing sales trends across quarters <span style="color: var(--accent);">(4 marks)</span></div>
+                            <div class="sq-part">ii. Analyze which product had the highest sales and which quarter was most profitable <span style="color: var(--accent);">(3 marks)</span></div>
+                            <div class="sq-part">iii. Explain how changing a single sales value would affect your totals and graph <span style="color: var(--accent);">(3 marks)</span></div>
+                        </div>
+                        <div class="answer-box"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p>Basic Computing Examination Paper | Module 1 | © 2024</p>
+            <p>This examination paper is based on the Basic Computing Syllabus</p>
+        </div>
+    </div>
+
+    <script>
+        function downloadHTML() {
+            const element = document.documentElement;
+            const html = '<!DOCTYPE html>\n' + element.outerHTML;
+            const blob = new Blob([html], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'Basic_Computing_Exam.html';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
