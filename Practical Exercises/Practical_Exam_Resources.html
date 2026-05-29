@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Computing - Practical Exam Resources</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e3a5f;
+            --secondary-color: #2d5a8c;
+            --accent-color: #e8652e;
+            --text-dark: #1a1a1a;
+            --text-light: #333333;
+            --border-color: #d0d0d0;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --success-color: #27ae60;
+            --info-color: #3498db;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: var(--bg-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            border-bottom: 4px solid var(--accent-color);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            margin-top: 5px;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            background-color: var(--secondary-color);
+            padding: 15px 30px;
+            display: flex;
+            gap: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap;
+        }
+
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-bar a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main Content */
+        .content {
+            padding: 40px 30px;
+        }
+
+        /* Section Headings */
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            color: var(--info-color);
+            font-size: 1.1em;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background-color: var(--bg-light);
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            overflow-x: auto;
+        }
+
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: var(--bg-white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        table thead {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+        }
+
+        table td {
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+
+        table tbody tr:hover {
+            background-color: #e8f4ff;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 30px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        /* Inline Lists */
+        .inline-list {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .inline-list li {
+            margin-bottom: 12px;
+            padding-left: 0;
+        }
+
+        .inline-list li:before {
+            content: "•";
+            color: var(--accent-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        /* Highlighted Boxes */
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid var(--info-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .success-box {
+            background-color: #e8f5e9;
+            border-left: 4px solid var(--success-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background-color: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .info-box strong, .success-box strong, .warning-box strong {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* Nested Lists */
+        .nested-list {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Text Formatting */
+        strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        em {
+            font-style: italic;
+            color: var(--secondary-color);
+        }
+
+        /* Checkmarks and Crosses */
+        .checkmark {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .cross {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+
+        /* Example Boxes */
+        .example-box {
+            background-color: #f5f5f5;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .example-box strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            border-top: 4px solid var(--accent-color);
+            font-size: 0.95em;
+        }
+
+        .footer p {
+            margin-bottom: 8px;
+        }
+
+        /* Section Container */
+        .section {
+            margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                padding: 0;
+                background: white;
+            }
+
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+
+            .nav-bar {
+                display: none;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header {
+                padding: 25px 20px;
+            }
+
+            .content {
+                padding: 25px 20px;
+            }
+
+            .nav-bar {
+                flex-wrap: wrap;
+                gap: 15px;
+                padding: 10px 20px;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            table th, table td {
+                padding: 8px 10px;
+            }
+
+            h2 {
+                font-size: 1.4em;
+            }
+
+            h3 {
+                font-size: 1.1em;
+            }
+        }
+
+        /* Highlight Text */
+        .highlight {
+            background-color: #fff59d;
+            padding: 2px 6px;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>BASIC COMPUTING PRACTICAL EXAM</h1>
+            <p>Reference Resources & Sample Data</p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-bar">
+            <a href="#q1-resources">Question 1</a>
+            <a href="#q2-resources">Question 2</a>
+            <a href="#q3-resources">Question 3</a>
+            <a href="#additional">Additional Resources</a>
+            <a href="#educator-notes">Educator Notes</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <div class="info-box">
+                <strong>📌 How to Use This Document</strong>
+                This resource provides sample data, dummy text, and realistic examples that can be used to complete the practical exam questions. Students should use these as references and guidance but create their own original work for assessment purposes.
+            </div>
+
+            <!-- QUESTION 1 RESOURCES -->
+            <div class="section" id="q1-resources">
+                <h2>Question 1: Word Processing - Sample Letter Content</h2>
+
+                <h3>Sender Information</h3>
+                <div class="code-block">
+                    <pre>Johnson & Associates Consulting Ltd.
+2847 Business Plaza
+Suite 450
+New York, NY 10017
+(555) 234-5678
+info@johnsonassociates.com</pre>
+                </div>
+
+                <h3>Date</h3>
+                <p>May 29, 2026</p>
+
+                <h3>Recipient Information</h3>
+                <div class="code-block">
+                    <pre>Ms. Sarah Chen
+Director of Training
+Digital Skills Academy
+1205 Learning Center Drive
+Boston, MA 02115</pre>
+                </div>
+
+                <h3>Letter Body (Sample Draft - Minimum 200 words)</h3>
+                <div class="code-block">
+                    <pre>Dear Ms. Chen,
+
+I hope this message finds you in good health and spirits. I am writing to inquire about the computer training programs currently offered by Digital Skills Academy for professional development.
+
+Our organization is planning to enhance the technical capabilities of our staff members, and we believe that your institution provides excellent training services. We are particularly interested in the following areas:
+
+• Intermediate Microsoft Word and Excel proficiency
+• Basic web design and HTML fundamentals
+• Data management and database basics
+• Professional presentation skills using PowerPoint
+
+We would appreciate detailed information regarding the following aspects of your courses:
+
+1. Course duration and schedule flexibility
+2. Certification upon completion
+3. Pricing and available discounts for group enrollment
+4. Instructor qualifications and experience
+5. Hands-on practical components
+
+Additionally, we would like to know if your academy provides corporate training packages for teams of 10-15 participants. We are interested in customized courses tailored to our specific industry requirements.
+
+Please provide us with comprehensive course catalogs, syllabi, and any testimonials from previous corporate clients. We are particularly interested in courses that can be completed within the next three months to align with our organizational development timeline.
+
+Thank you for your time and attention to this inquiry. I look forward to hearing from you at your earliest convenience.
+
+Yours sincerely,
+
+_________________
+James Richardson
+Human Resources Manager
+Johnson & Associates Consulting Ltd.</pre>
+                </div>
+            </div>
+
+            <!-- QUESTION 2 RESOURCES -->
+            <div class="section" id="q2-resources">
+                <h2>Question 2: Spreadsheet - Sample Sales Data</h2>
+
+                <h3>Spreadsheet Planning Document</h3>
+                <div class="success-box">
+                    <strong>Purpose:</strong>
+                    Monthly sales tracking and analysis for retail store inventory management and business performance evaluation
+                    <br><br>
+                    <strong>Spreadsheet Specifications:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Track sales data across three product categories</li>
+                        <li>Monitor performance over three-month period</li>
+                        <li>Calculate totals, averages, and identify peak performance</li>
+                        <li>Generate visual representation for management reports</li>
+                        <li>Enable quick data modification and automatic recalculation</li>
+                    </ul>
+                </div>
+
+                <h3>Monthly Sales Data (in USD)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product Category</th>
+                            <th>January</th>
+                            <th>February</th>
+                            <th>March</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Electronics</td>
+                            <td>$8,450.00</td>
+                            <td>$9,200.00</td>
+                            <td>$11,500.00</td>
+                        </tr>
+                        <tr>
+                            <td>Clothing</td>
+                            <td>$5,320.00</td>
+                            <td>$6,150.00</td>
+                            <td>$7,800.00</td>
+                        </tr>
+                        <tr>
+                            <td>Home & Garden</td>
+                            <td>$4,890.00</td>
+                            <td>$5,670.00</td>
+                            <td>$6,430.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Formulas to Implement</h3>
+
+                <h4>Monthly Totals (SUM Function)</h4>
+                <ul>
+                    <li><strong>January Total:</strong> =SUM(B2:B4) → Result: <span class="highlight">$18,660.00</span></li>
+                    <li><strong>February Total:</strong> =SUM(C2:C4) → Result: <span class="highlight">$21,020.00</span></li>
+                    <li><strong>March Total:</strong> =SUM(D2:D4) → Result: <span class="highlight">$25,730.00</span></li>
+                </ul>
+
+                <h4>Category Averages (AVERAGE Function)</h4>
+                <ul>
+                    <li><strong>Electronics Average:</strong> =AVERAGE(B2:D2) → Result: <span class="highlight">$9,716.67</span></li>
+                    <li><strong>Clothing Average:</strong> =AVERAGE(B3:D3) → Result: <span class="highlight">$6,423.33</span></li>
+                    <li><strong>Home & Garden Average:</strong> =AVERAGE(B4:D4) → Result: <span class="highlight">$5,663.33</span></li>
+                </ul>
+
+                <h4>Maximum Sales Value (MAX Function)</h4>
+                <ul>
+                    <li><strong>Highest Sale:</strong> =MAX(B2:D4) → Result: <span class="highlight">$11,500.00</span> (Electronics - March)</li>
+                </ul>
+
+                <h4>Additional Calculations</h4>
+                <ul>
+                    <li><strong>Total Sales (All Categories, All Months):</strong> =SUM(B2:D4) → Result: <span class="highlight">$65,410.00</span></li>
+                    <li><strong>Quarter Average:</strong> =AVERAGE(B2:D4) → Result: <span class="highlight">$7,267.78</span></li>
+                    <li><strong>Percentage of Total:</strong>
+                        <ul>
+                            <li>Electronics: ($29,150 ÷ $65,410) × 100 = <span class="highlight">44.58%</span></li>
+                            <li>Clothing: ($19,270 ÷ $65,410) × 100 = <span class="highlight">29.45%</span></li>
+                            <li>Home & Garden: ($16,990 ÷ $65,410) × 100 = <span class="highlight">25.97%</span></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Alternative Sample Data (if needed)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product Category</th>
+                            <th>January</th>
+                            <th>February</th>
+                            <th>March</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Electronics</td>
+                            <td>$12,300.50</td>
+                            <td>$14,200.75</td>
+                            <td>$16,850.25</td>
+                        </tr>
+                        <tr>
+                            <td>Clothing</td>
+                            <td>$8,950.00</td>
+                            <td>$9,675.50</td>
+                            <td>$11,200.00</td>
+                        </tr>
+                        <tr>
+                            <td>Home & Garden</td>
+                            <td>$6,540.75</td>
+                            <td>$7,425.00</td>
+                            <td>$8,950.50</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- QUESTION 3 RESOURCES -->
+            <div class="section" id="q3-resources">
+                <h2>Question 3: Presentation - Cybersecurity Basics Content</h2>
+
+                <div class="info-box">
+                    <strong>📊 Presentation Overview</strong>
+                    Complete slide-by-slide content for a Cybersecurity Basics presentation targeting new employees.
+                </div>
+
+                <h3>Slide 1: Title Slide</h3>
+                <div class="example-box">
+                    <strong>CYBERSECURITY BASICS</strong>
+                    Essential Digital Safety Practices for Employees<br><br>
+                    Presenter: [Student Name]<br>
+                    Date: [Current Date]<br>
+                    Organization: [Organization Name]
+                </div>
+
+                <h3>Slide 2: Introduction & Importance</h3>
+                <h4>Title: Why Cybersecurity Matters</h4>
+                <div class="success-box">
+                    <strong>Key Points:</strong>
+                    <ul>
+                        <li>Over 4 billion cyber attacks occur annually worldwide</li>
+                        <li>Average cost of a data breach: $4.45 million</li>
+                        <li>95% of breaches are due to human error</li>
+                        <li>Every employee plays a role in organizational security</li>
+                        <li>Protecting data = protecting the company and customers</li>
+                    </ul>
+                </div>
+
+                <h3>Slide 3: Password Security</h3>
+                <h4>Title: Creating & Maintaining Strong Passwords</h4>
+                <div class="example-box">
+                    <strong>Essential Elements:</strong>
+                    <ul>
+                        <li>Minimum 12 characters in length</li>
+                        <li>Mix of uppercase, lowercase, numbers, and symbols</li>
+                        <li>Avoid personal information (birthdate, names, addresses)</li>
+                        <li>Never share passwords with colleagues</li>
+                        <li>Change passwords every 90 days</li>
+                        <li>Use unique passwords for each account</li>
+                        <li>Avoid common passwords (123456, password, qwerty)</li>
+                    </ul>
+                </div>
+
+                <h4>Examples of Strong Passwords:</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Weak Passwords ❌</th>
+                            <th>Strong Passwords ✓</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>MyName2024</td>
+                            <td>Tr@p!cZ3bra#2024$Secure</td>
+                        </tr>
+                        <tr>
+                            <td>December25</td>
+                            <td>BlueMoon$47^NightSky@2026</td>
+                        </tr>
+                        <tr>
+                            <td>Password123</td>
+                            <td>K9#mPx2$vL8@qR4wZ</td>
+                        </tr>
+                        <tr>
+                            <td>123456</td>
+                            <td>GreenM0rning!Sky2024</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Red Flags to Avoid:</h4>
+                <div class="warning-box">
+                    <ul>
+                        <li><span class="cross">❌</span> Writing passwords on sticky notes</li>
+                        <li><span class="cross">❌</span> Using "password" as your password</li>
+                        <li><span class="cross">❌</span> Sharing passwords in emails</li>
+                        <li><span class="cross">❌</span> Using the same password everywhere</li>
+                        <li><span class="cross">❌</span> Including usernames in passwords</li>
+                    </ul>
+                </div>
+
+                <h3>Slide 4: Identifying Phishing Attacks</h3>
+                <h4>Title: Recognize & Avoid Phishing Threats</h4>
+
+                <div class="example-box">
+                    <strong>What is Phishing?</strong>
+                    <ul>
+                        <li>Fraudulent attempt to obtain sensitive information</li>
+                        <li>Usually via deceptive emails, websites, or messages</li>
+                        <li>Criminals impersonate trusted organizations</li>
+                        <li>Goal: Steal passwords, credit card info, or personal data</li>
+                    </ul>
+                </div>
+
+                <h4>Common Warning Signs:</h4>
+
+                <h4>1. Suspicious Sender Address</h4>
+                <ul>
+                    <li><span class="cross">❌</span> Example: noreply@paypa1.com (note the "1" instead of "l")</li>
+                    <li><span class="checkmark">✓</span> Always check full email address, not just display name</li>
+                </ul>
+
+                <h4>2. Urgent Language & Threats</h4>
+                <ul>
+                    <li>"Verify your account immediately or it will be closed"</li>
+                    <li>"Unusual activity detected - confirm now"</li>
+                    <li>"Click here or you'll lose access"</li>
+                </ul>
+
+                <h4>3. Suspicious Links</h4>
+                <ul>
+                    <li>Hover over links to see actual URL</li>
+                    <li><span class="checkmark">✓</span> Real bank links: https://www.yourbank.com</li>
+                    <li><span class="cross">❌</span> Phishing links: https://www.yourbank-secure.com.phishing.net</li>
+                </ul>
+
+                <h4>4. Generic Greetings</h4>
+                <ul>
+                    <li><span class="cross">❌</span> "Dear Customer" instead of your name</li>
+                    <li><span class="checkmark">✓</span> Legitimate companies usually personalize emails</li>
+                </ul>
+
+                <h4>5. Requests for Personal Information</h4>
+                <div class="warning-box">
+                    <ul>
+                        <li>Banks never ask for passwords via email</li>
+                        <li>Social Security numbers requested via email = PHISHING</li>
+                        <li>Credit card details in email = SCAM</li>
+                    </ul>
+                </div>
+
+                <h4>6. Attachments from Unknown Senders</h4>
+                <ul>
+                    <li>Executable files (.exe, .bat)</li>
+                    <li>Suspicious Office documents</li>
+                    <li>Always verify sender before opening</li>
+                </ul>
+
+                <h4>Real Examples to Watch Out For:</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Suspicious Email</th>
+                            <th>What to Do</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>"Amazon Alert: Suspicious Activity Detected"</td>
+                            <td>Verify directly on Amazon.com (don't click the email link)</td>
+                        </tr>
+                        <tr>
+                            <td>"Update Your Bank Account Now"</td>
+                            <td>Call your bank's official phone number</td>
+                        </tr>
+                        <tr>
+                            <td>"Confirm Your PayPal Information"</td>
+                            <td>Go directly to PayPal.com in your browser</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Slide 5: Data Protection Practices</h3>
+                <h4>Title: Safeguarding Company & Customer Data</h4>
+
+                <h4>1. Physical Security</h4>
+                <ul>
+                    <li>Lock your computer when stepping away</li>
+                    <li>Don't leave sensitive documents visible</li>
+                    <li>Use privacy screens in public spaces</li>
+                    <li>Secure office access with ID badges</li>
+                </ul>
+
+                <h4>2. Digital Security</h4>
+                <ul>
+                    <li>Use VPN on public WiFi networks</li>
+                    <li>Enable two-factor authentication (2FA) where available</li>
+                    <li>Encrypt sensitive files</li>
+                    <li>Use approved storage solutions only</li>
+                </ul>
+
+                <h4>3. Data Handling</h4>
+                <ul>
+                    <li>Only access data you need for your job</li>
+                    <li>Don't share data with unauthorized people</li>
+                    <li>Use secure methods for transferring files</li>
+                    <li>Delete data when no longer needed</li>
+                </ul>
+
+                <h4>4. Incident Response</h4>
+                <ul>
+                    <li>Report suspicious activity immediately</li>
+                    <li>Don't attempt to investigate breaches yourself</li>
+                    <li>Document what happened and when</li>
+                    <li>Contact IT security team right away</li>
+                </ul>
+
+                <h4>Classification Levels:</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Level</th>
+                            <th>Description</th>
+                            <th>Examples</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Public</strong></td>
+                            <td>Can be shared externally</td>
+                            <td>Marketing materials, press releases</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Internal</strong></td>
+                            <td>Restricted to employees</td>
+                            <td>Policies, procedures, team updates</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Confidential</strong></td>
+                            <td>Sensitive business data</td>
+                            <td>Financial records, strategies, plans</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Restricted</strong></td>
+                            <td>Highest security level</td>
+                            <td>Personal data, trade secrets, passwords</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Slide 6: Safe Browsing Practices</h3>
+                <h4>Title: Protecting Yourself Online</h4>
+
+                <h4>1. Website Safety</h4>
+                <ul>
+                    <li>Look for "https://" (secure connection)</li>
+                    <li>Check for padlock icon in address bar</li>
+                    <li>Verify website address is correct (not lookalikes)</li>
+                    <li>Avoid clicking on ads or pop-ups</li>
+                </ul>
+
+                <h4>2. Download Safety</h4>
+                <ul>
+                    <li>Download only from official sources</li>
+                    <li>Verify file sizes (unusually small files = suspicious)</li>
+                    <li>Scan downloads with antivirus before opening</li>
+                    <li>Never download from untrusted sources</li>
+                </ul>
+
+                <h4>3. Social Media Awareness</h4>
+                <ul>
+                    <li>Limit personal information shared publicly</li>
+                    <li>Don't accept friend requests from strangers</li>
+                    <li>Be cautious with location sharing</li>
+                    <li>Review privacy settings regularly</li>
+                </ul>
+
+                <h4>4. Avoiding Malware</h4>
+                <ul>
+                    <li>Keep software and OS updated</li>
+                    <li>Use reputable antivirus software</li>
+                    <li>Disable auto-play for USB drives</li>
+                    <li>Be wary of "free" software downloads</li>
+                </ul>
+
+                <h4>5. Public WiFi Safety</h4>
+                <ul>
+                    <li>Avoid banking/shopping on public WiFi</li>
+                    <li>Use company VPN if available</li>
+                    <li>Disable auto-connect features</li>
+                    <li>Turn off file sharing on your device</li>
+                </ul>
+
+                <h4>Common Threats:</h4>
+                <div class="warning-box">
+                    <ul>
+                        <li><strong>Ransomware:</strong> Locks your files, demands payment</li>
+                        <li><strong>Spyware:</strong> Secretly monitors your activity</li>
+                        <li><strong>Trojans:</strong> Appears legitimate but contains malware</li>
+                        <li><strong>Worms:</strong> Self-replicating programs that spread through networks</li>
+                    </ul>
+                </div>
+
+                <h3>Slide 7: Conclusion & Key Takeaways</h3>
+                <h4>Title: Your Role in Cybersecurity</h4>
+
+                <div class="success-box">
+                    <strong>Remember:</strong>
+                    <ol>
+                        <li>You are the first line of defense against cyber attacks</li>
+                        <li>Strong passwords + vigilance = reduced risk</li>
+                        <li>Report suspicious activity immediately - it could prevent a breach</li>
+                        <li>Stay informed - attend security training regularly</li>
+                        <li>Ask if unsure - IT security team is here to help</li>
+                    </ol>
+                </div>
+
+                <h4>Quick Checklist:</h4>
+                <ul>
+                    <li><span class="checkmark">✓</span> Use strong, unique passwords</li>
+                    <li><span class="checkmark">✓</span> Question unexpected emails or links</li>
+                    <li><span class="checkmark">✓</span> Lock your computer when away</li>
+                    <li><span class="checkmark">✓</span> Keep software updated</li>
+                    <li><span class="checkmark">✓</span> Report security concerns</li>
+                </ul>
+
+                <h4>Contact Information:</h4>
+                <div class="info-box">
+                    <ul>
+                        <li><strong>IT Security Team:</strong> security@company.com</li>
+                        <li><strong>Security Hotline:</strong> ext. 5555</li>
+                        <li><strong>Emergency Incidents:</strong> security.emergency@company.com</li>
+                    </ul>
+                </div>
+
+                <h3>Credible Information Sources</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Source</th>
+                            <th>Website</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CISA</td>
+                            <td>https://www.cisa.gov/</td>
+                            <td>Government resource for cybersecurity best practices</td>
+                        </tr>
+                        <tr>
+                            <td>FBI IC3</td>
+                            <td>https://www.ic3.gov/</td>
+                            <td>Phishing and scam awareness resources</td>
+                        </tr>
+                        <tr>
+                            <td>Microsoft Security</td>
+                            <td>https://security.microsoft.com/</td>
+                            <td>Best practices for data protection</td>
+                        </tr>
+                        <tr>
+                            <td>Cybersecurity Alliance</td>
+                            <td>https://cybersecurityalliance.org/</td>
+                            <td>Education and awareness resources</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ADDITIONAL RESOURCES -->
+            <div class="section" id="additional">
+                <h2>Additional Resources & Guidelines</h2>
+
+                <h3>Letter Writing Tips (Question 1)</h3>
+                <div class="info-box">
+                    <ul>
+                        <li>Single space within paragraphs, double space between paragraphs</li>
+                        <li>Use 1-inch margins on all sides</li>
+                        <li>Standard font: Times New Roman, Arial, or Calibri (12pt)</li>
+                        <li>Proper business letter format: sender info → date → recipient → salutation → body → closing</li>
+                        <li>Keep language formal and professional</li>
+                        <li>Proofread for spelling and grammar errors</li>
+                    </ul>
+                </div>
+
+                <h3>Spreadsheet Formatting Tips (Question 2)</h3>
+                <div class="success-box">
+                    <ul>
+                        <li>Header row: Bold, centered, light blue/gray background</li>
+                        <li>Data rows: Left-aligned for text, right-aligned for numbers</li>
+                        <li>Currency format: $#,##0.00</li>
+                        <li>Column widths: Minimum 12-15 characters</li>
+                        <li>Borders: Light gray, 0.5pt width</li>
+                        <li>Freeze panes to keep headers visible while scrolling</li>
+                    </ul>
+                </div>
+
+                <h3>Presentation Design Tips (Question 3)</h3>
+                <div class="info-box">
+                    <ul>
+                        <li>Slide ratio: 16:9 widescreen format</li>
+                        <li>Font sizes: Title (44-54pt), Body (28-32pt), Captions (18-24pt)</li>
+                        <li>Color scheme: 2-3 main colors, avoid more than 5 colors total</li>
+                        <li>Consistency: Same fonts, colors, and layout throughout</li>
+                        <li>Contrast: Dark text on light background or vice versa</li>
+                        <li>Images: High quality, relevant to content (min 300 DPI)</li>
+                        <li>Text per slide: 5-6 lines maximum, use bullet points</li>
+                        <li>Animation: Minimal use, focus on content clarity</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- EDUCATOR NOTES -->
+            <div class="section" id="educator-notes">
+                <h2>Notes for Educators</h2>
+
+                <div class="success-box">
+                    <strong>How to Use These Resources:</strong>
+                    <ul>
+                        <li><strong>Provide to Students:</strong> Share as guidance and inspiration for their work</li>
+                        <li><strong>Modify:</strong> Adapt data, scenarios, or content to suit your needs</li>
+                        <li><strong>Use as Answers:</strong> Reference when marking student work</li>
+                        <li><strong>Customize:</strong> Tailor for your specific industry or organizational context</li>
+                        <li><strong>Adjust Difficulty:</strong> Increase or decrease complexity based on student level</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <strong>Important Note:</strong>
+                    Students should use these resources as references but create their own original work for assessment purposes. These examples are meant to guide and inspire, not to be copied directly.
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>Basic Computing - Practical Exam Resources</strong></p>
+            <p>This document provides sample data and reference materials for the practical exam questions.</p>
+            <p style="margin-top: 15px; opacity: 0.8;">Use alongside the Practical Exam HTML document | Print or save as PDF for easy sharing</p>
+        </div>
+    </div>
+</body>
+</html>
