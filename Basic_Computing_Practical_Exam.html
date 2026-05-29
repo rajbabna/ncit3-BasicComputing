@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Computing - Practical Exam</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e3a5f;
+            --secondary-color: #2d5a8c;
+            --accent-color: #e8652e;
+            --text-dark: #1a1a1a;
+            --text-light: #333333;
+            --border-color: #d0d0d0;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --success-color: #27ae60;
+            --info-color: #3498db;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--bg-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            border-bottom: 4px solid var(--accent-color);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            margin-top: 5px;
+        }
+
+        .exam-meta {
+            background-color: var(--bg-light);
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .meta-item {
+            padding: 10px 0;
+        }
+
+        .meta-item strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .meta-item span {
+            font-size: 1em;
+            color: var(--text-light);
+        }
+
+        /* Navigation */
+        .nav-bar {
+            background-color: var(--secondary-color);
+            padding: 15px 30px;
+            display: flex;
+            gap: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-bar a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main Content */
+        .content {
+            padding: 40px 30px;
+        }
+
+        /* Questions */
+        .question-section {
+            margin-bottom: 50px;
+            page-break-inside: avoid;
+        }
+
+        .question-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 25px;
+            margin: -40px -30px 30px -30px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--accent-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .question-title {
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+
+        .question-marks {
+            background-color: var(--accent-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 1em;
+        }
+
+        .competency {
+            background-color: var(--bg-light);
+            padding: 15px 20px;
+            border-left: 3px solid var(--info-color);
+            margin-bottom: 25px;
+            font-style: italic;
+            color: var(--secondary-color);
+        }
+
+        .scenario {
+            background-color: #f0f7ff;
+            padding: 20px;
+            border-left: 4px solid var(--info-color);
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+
+        .scenario-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        .scenario p {
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .task-section {
+            margin-top: 30px;
+        }
+
+        .task-title {
+            color: var(--primary-color);
+            font-size: 1.15em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .task-items {
+            background-color: var(--bg-light);
+            padding: 25px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+        }
+
+        .task-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px dotted var(--border-color);
+        }
+
+        .task-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .task-item-header {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mark-badge {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .task-item ul, .task-item ol {
+            margin-left: 25px;
+            margin-top: 10px;
+            color: var(--text-light);
+        }
+
+        .task-item li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .marking-scheme {
+            background-color: #e8f5e9;
+            padding: 20px 25px;
+            border-left: 4px solid var(--success-color);
+            margin-top: 25px;
+            border-radius: 4px;
+        }
+
+        .marking-title {
+            color: var(--success-color);
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 1em;
+        }
+
+        .marking-items {
+            list-style: none;
+        }
+
+        .marking-items li {
+            padding: 6px 0;
+            color: var(--text-light);
+            border-bottom: 1px solid rgba(39, 174, 96, 0.2);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .marking-items li:last-child {
+            border-bottom: none;
+        }
+
+        .mark-value {
+            font-weight: 600;
+            color: var(--success-color);
+        }
+
+        /* General Requirements Section */
+        .general-section {
+            background-color: var(--bg-light);
+            padding: 30px;
+            margin-top: 50px;
+            border-top: 3px solid var(--accent-color);
+            border-radius: 4px;
+        }
+
+        .general-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .requirement-card {
+            background-color: white;
+            padding: 20px;
+            border-left: 3px solid var(--accent-color);
+            border-radius: 4px;
+        }
+
+        .requirement-card strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* Assessment Notes */
+        .assessment-notes {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            padding: 30px;
+            margin-top: 50px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        .assessment-notes h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .note-item {
+            background-color: white;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .note-item h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        .note-item p {
+            color: var(--text-light);
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            border-top: 4px solid var(--accent-color);
+            font-size: 0.95em;
+        }
+
+        .footer p {
+            margin-bottom: 8px;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                padding: 0;
+                background: white;
+            }
+
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+
+            .nav-bar {
+                display: none;
+            }
+
+            .question-section {
+                page-break-inside: avoid;
+            }
+
+            .header {
+                page-break-after: avoid;
+            }
+
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header {
+                padding: 25px 20px;
+            }
+
+            .content {
+                padding: 25px 20px;
+            }
+
+            .question-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+                margin: -25px -20px 25px -20px;
+            }
+
+            .nav-bar {
+                flex-wrap: wrap;
+                gap: 15px;
+                padding: 10px 20px;
+            }
+
+            .requirements-grid,
+            .notes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .exam-meta {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-section {
+            animation: slideIn 0.5s ease forwards;
+        }
+
+        .question-section:nth-child(1) { animation-delay: 0s; }
+        .question-section:nth-child(2) { animation-delay: 0.1s; }
+        .question-section:nth-child(3) { animation-delay: 0.2s; }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-30 {
+            margin-top: 30px;
+        }
+
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>BASIC COMPUTING</h1>
+            <p>Practical Examination</p>
+        </div>
+
+        <!-- Exam Metadata -->
+        <div class="exam-meta">
+            <div class="meta-item">
+                <strong>Total Marks</strong>
+                <span>75 Marks</span>
+            </div>
+            <div class="meta-item">
+                <strong>Duration</strong>
+                <span>30-36 Hours</span>
+            </div>
+            <div class="meta-item">
+                <strong>Questions</strong>
+                <span>3 Practical Tasks</span>
+            </div>
+            <div class="meta-item">
+                <strong>Marks Per Question</strong>
+                <span>25 Marks Each</span>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-bar">
+            <a href="#question1">Question 1</a>
+            <a href="#question2">Question 2</a>
+            <a href="#question3">Question 3</a>
+            <a href="#requirements">Requirements</a>
+            <a href="#notes">Assessment Notes</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- QUESTION 1 -->
+            <div class="question-section" id="question1">
+                <div class="question-header">
+                    <div class="question-title">Question 1: Word Processing & Document Creation</div>
+                    <div class="question-marks">25 Marks</div>
+                </div>
+
+                <div class="competency">
+                    <strong>Competency:</strong> Operate a Word Processor
+                </div>
+
+                <div class="scenario">
+                    <div class="scenario-title">Scenario</div>
+                    <p>You are a secretary at a small company. You have been asked to create a professional business letter and a simple informational document.</p>
+                </div>
+
+                <div class="task-section">
+                    <div class="task-title">Task</div>
+                    <p style="margin-bottom: 20px;">Using a word processor, create a professional business letter with the following specifications:</p>
+
+                    <div class="task-items">
+                        <div class="task-item">
+                            <div class="task-item-header">
+                                <span>1. Letter Format</span>
+                                <span class="mark-badge">5 marks</span>
+                            </div>
+                            <ul>
+                                <li>Include proper letter layout with sender's address, date, recipient's address, and salutation</li>
+                                <li>Use appropriate spacing and margins</li>
+                                <li>Include a closing and signature line</li>
+                            </ul>
+                        </div>
+
+                        <div class="task-item">
+                            <div class="task-item-header">
+                                <span>2. Content and Formatting</span>
+                                <span class="mark-badge">8 marks</span>
+                            </div>
+                            <ul>
+                                <li>Write a letter (minimum 200 words) requesting information about a computer training program</li>
+                                <li>Apply at least THREE different formatting techniques:
+                                    <ul>
+                                        <li>Bold text for important points</li>
+                                        <li>Bullet points or numbered lists for key information</li>
+                                        <li>Italics or underline for emphasis</li>
+                                    </ul>
+                                </li>
+                                <li>Ensure proper paragraph formatting with adequate spacing between paragraphs</li>
+                            </ul>
+                        </div>
+
+                        <div class="task-item">
+                            <div class="task-item-header">
+                                <span>3. Document Manipulation</span>
+                                <span class="mark-badge">7 marks</span>
+                            </div>
+                            <ul>
+                                <li>Use Find and Replace to change all instances of a word (e.g., replace "course" with "training program")</li>
+                                <li>Demonstrate ability to copy and paste a section within the document</li>
+                                <li>Show evidence of spell checking and grammar checking</li>
+                                <li>Include a footer with the document name and page number</li>
+                            </ul>
+                        </div>
+
+                        <div class="task-item">
+                            <div class="task-item-header">
+                                <span>4. File Management and Printing</span>
+                                <span class="mark-badge">5 marks</span>
+                            </div>
+                            <ul>
+                                <li>Save the document with an appropriate filename</li>
+                                <li>Display the Print Preview</li>
+                                <li>Show the directory/folder contents demonstrating file location</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="marking-scheme">
+                    <div class="marking-title">Marking Breakdown</div>
+                    <ul class="marking-items">
+                        <li>Letter format and structure<span class="mark-value">5 marks</span></li>
+                        <li>Content quality and formatting techniques<span class="mark-value">8 marks</span></li>
+                        <li>Document manipulation and editing<span class="mark-value">7 marks</span></li>
+                        <li>File management and output<span class="mark-value">5 marks</span></li>
+                        <li><strong>Total</strong><span class="mark-value">25 marks</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <div class="question-section" id="question2">
+                <div class="question-header">
+                    <div class="question-title">Question 2: Spreadsheet Problem-Solving</div>
+                    <div class="question-marks">25 Marks</div>
+                </div>
+
+                <div class="competency">
+                    <strong>Competency:</strong> Create and Use a Simple Computer Spreadsheet to Solve a Problem
+                </div>
+
+                <div class="scenario">
+                    <div class="scenario-title">Scenario</div>
+                    <p>A small retail store owner needs to track monthly sales for three product categories (Electronics, Clothing, Home & Garden) over a three-month period (January, February, March). The owner needs to calculate totals, averages, and create a visual representation of the data.</p>
+                </div>
+
+                <div class="task-section">
+                    <div class="task-title">Task</div>
+                    <p style="margin-bottom: 20px;">Create a spreadsheet to solve this problem with the following requirements:</p>
+
+                    <div class="task-items">
+                        <div class="task-item">
+                            <div class="task-item-header">
+                                <span>1. Data Entry and Planning</span>
+                                <span class="mark-badge">4 marks</span>
+                            </div>
+                            <ul>
+                                <li>Create a working plan documenting:
+                                    <ul>
+                                        <li>Purpose of the spreadsheet (sales tracking and analysis)</li>
+                                        <li>Spreadsheet specifications required</li>
+                                    </ul>
+                                </li>
+                                <li>Enter sample sales data for the three categories across three months</li>
+                                <li>Organize data in a logical table format with clear headers</li>
+                            </ul>
+                        </div>
+
+                        <div class="task-item">
+                            <div class="task-item-header">
+                                <span>2. Formatting and Cell Design</span>
+                                <span class="mark-badge">5 marks</span>
+                            </div>
+                            <ul>
+                                <li>Format column headers (bold, centered, colored background)</li>
+                                <li>Adjust cell widths appropriately for readability</li>
+                                <li>Apply number formatting to currency values (show as $ with 2 decimal places)</li>
+                                <li>Apply text alignment (left, center, right) where appropriate</li>
+                                <li>Use borders to define table structure</li>
+                            </ul>
+                        </div>
+
+                        <div class="task-item">
+                            <div class="task-item-header">
+                                <span>3. Formulas and Functions</span>
+                                <span class="mark-badge">8 marks</span>
+                            </div>
+                            <ul>
+                                <li>Calculate the monthly total sales (use SUM function) – 2 marks</li>
+                                <li>Calculate the average sales per category (use AVERAGE function) – 2 marks</li>
+                                <li>Calculate the maximum sales value (use MAX function) – 2 marks</li>
+                                <li>Create at least one additional calculation (e.g., total sales across all categories, percentage of total) – 2 marks</li>
+                            </ul>
+                        </div>
+
+                        <div class="task-item">
+                            <div class="task-item-header">
+                                <span>4. Data Visualization and Output</span>
+                                <span class="mark-badge">5 marks</span>
+                            </div>
+                            <ul>
+                                <li>Create a graph/chart using the data (bar chart, column chart, or pie chart) – 3 marks</li>
+                                <li>Save the spreadsheet file with appropriate naming – 1 mark</li>
+                                <li>Print or export the spreadsheet in PDF format showing both data and graph – 1 mark</li>
+                            </ul>
+                        </div>
+
+                        <div class="task-item">
+                            <div class="task-item-header">
+                                <span>5. Problem Solution and Modification</span>
+                                <span class="mark-badge">3 marks</span>
+                            </div>
+                            <ul>
+                                <li>Open the saved spreadsheet file</li>
+                                <li>Modify one data entry and demonstrate that formulas update automatically</li>
+                                <li>Show ability to use cell ranges for creating the graph</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="marking-scheme">
+                    <div class="marking-title">Marking Breakdown</div>
+                    <ul class="marking-items">
+                        <li>Data entry and planning<span class="mark-value">4 marks</span></li>
+                        <li>Formatting and presentation<span class="mark-value">5 marks</span></li>
+                        <li>Formulas and functions<span class="mark-value">8 marks</span></li>
+                        <li>Data visualization and output<span class="mark-value">5 marks</span></li>
+                        <li>Problem solution and file manipulation<span class="mark-value">3 marks</span></li>
+                        <li><strong>Total</strong><span class="mark-value">25 marks</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <div class="question-section" id="question3">
+                <div class="question-header">
+                    <div class="question-title">Question 3: Presentation Design & Creation</div>
+                    <div class="question-marks">25 Marks</div>
+                </div>
+
+                <div class="competency">
+                    <strong>Competency:</strong> Use Computer Technology for Presentation Purposes
+                </div>
+
+                <div class="scenario">
+                    <div class="scenario-title">Scenario</div>
+                    <p>You have been tasked to create a presentation introducing "Cybersecurity Basics" to new employees in your organization. The presentation should be educational, professional, and engaging.</p>
+                </div>
+
+                <div class="task-section">
+                    <div class="task-title">Task</div>
+                    <p style="margin-bottom: 20px;">Design and create a presentation with the following specifications:</p>
+
+                    <div class="task-items">
+                        <div class="task-item">
+                            <div class="task-item-header">
+                                <span>1. Presentation Design and Planning</span>
+                                <span class="mark-badge">6 marks</span>
+                            </div>
+                            <ul>
+                                <li>Document the presentation design including:
+                                    <ul>
+                                        <li>Topic: Cybersecurity Basics – 1 mark</li>
+                                        <li>Purpose: Educate new employees on essential cybersecurity practices – 1 mark</li>
+                                        <li>Target Audience: New employees with varying IT knowledge – 1 mark</li>
+                                        <li>Method of Presentation: Digital slide presentation using presentation software – 1 mark</li>
+                                        <li>List 3-4 credible sources of information for the topic – 2 marks</li>
+                                    </ul>
+                                </li>
+                                <li>Outline the presentation structure and content plan (main topics to be covered)</li>
+                            </ul>
+                        </div>
+
+                        <div class="task-item">
+                            <div class="task-item-header">
+                                <span>2. Information Gathering and Content Organization</span>
+                                <span class="mark-badge">5 marks</span>
+                            </div>
+                            <ul>
+                                <li>Gather information on cybersecurity basics covering:
+                                    <ul>
+                                        <li>Password security</li>
+                                        <li>Phishing awareness</li>
+                                        <li>Data protection</li>
+                                        <li>Safe browsing practices</li>
+                                    </ul>
+                                </li>
+                                <li>Ensure information is relevant to the audience and purpose</li>
+                                <li>Organize information logically with clear sections/slides</li>
+                            </ul>
+                        </div>
+
+                        <div class="task-item">
+                            <div class="task-item-header">
+                                <span>3. Presentation Creation</span>
+                                <span class="mark-badge">8 marks</span>
+                            </div>
+                            <ul>
+                                <li>Create a minimum of 6 slides:
+                                    <ul>
+                                        <li>Title slide with topic, presenter name, and date – 1 mark</li>
+                                        <li>4 content slides covering the cybersecurity topics – 4 marks</li>
+                                        <li>Conclusion/Summary slide – 1 mark</li>
+                                    </ul>
+                                </li>
+                                <li>Ensure consistent design throughout (colors, fonts, layout)</li>
+                                <li>Include at least one image, diagram, or visual element per content slide</li>
+                                <li>Use appropriate text formatting and font sizes for readability</li>
+                                <li>Keep text concise with bullet points rather than paragraphs</li>
+                            </ul>
+                        </div>
+
+                        <div class="task-item">
+                            <div class="task-item-header">
+                                <span>4. Editing and Refinement</span>
+                                <span class="mark-badge">3 marks</span>
+                            </div>
+                            <ul>
+                                <li>Review content for consistency with design plan</li>
+                                <li>Edit information for clarity and accuracy</li>
+                                <li>Ensure formatting aligns with presentation design</li>
+                                <li>Check for spelling and grammar errors</li>
+                            </ul>
+                        </div>
+
+                        <div class="task-item">
+                            <div class="task-item-header">
+                                <span>5. Presentation Delivery</span>
+                                <span class="mark-badge">3 marks</span>
+                            </div>
+                            <ul>
+                                <li>Prepare to present the topic to the audience (new employees)</li>
+                                <li>Communicate information clearly using appropriate language</li>
+                                <li>Use the computer application effectively to display slides</li>
+                                <li>Demonstrate understanding of the topic content</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="marking-scheme">
+                    <div class="marking-title">Marking Breakdown</div>
+                    <ul class="marking-items">
+                        <li>Design planning and documentation<span class="mark-value">6 marks</span></li>
+                        <li>Information gathering and organization<span class="mark-value">5 marks</span></li>
+                        <li>Presentation creation and design<span class="mark-value">8 marks</span></li>
+                        <li>Editing and refinement<span class="mark-value">3 marks</span></li>
+                        <li>Presentation delivery<span class="mark-value">3 marks</span></li>
+                        <li><strong>Total</strong><span class="mark-value">25 marks</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- GENERAL REQUIREMENTS -->
+            <div class="general-section" id="requirements">
+                <h2>General Requirements for All Questions</h2>
+                <div class="requirements-grid">
+                    <div class="requirement-card">
+                        <strong>Academic Integrity</strong>
+                        <p>All work must be original and represent your own effort.</p>
+                    </div>
+                    <div class="requirement-card">
+                        <strong>Technical Proficiency</strong>
+                        <p>Demonstrate competent use of software features and tools.</p>
+                    </div>
+                    <div class="requirement-card">
+                        <strong>File Management</strong>
+                        <p>Save all files with descriptive names in appropriate locations.</p>
+                    </div>
+                    <div class="requirement-card">
+                        <strong>Time Management</strong>
+                        <p>Complete each question within allocated practical hours (10-12 hours per question).</p>
+                    </div>
+                    <div class="requirement-card">
+                        <strong>Evidence</strong>
+                        <p>Keep screenshots or exports showing completion of all tasks.</p>
+                    </div>
+                    <div class="requirement-card">
+                        <strong>Documentation</strong>
+                        <p>Provide written evidence of planning and design decisions where required.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ASSESSMENT NOTES -->
+            <div class="assessment-notes" id="notes">
+                <h2>Assessment Notes</h2>
+                <div class="notes-grid">
+                    <div class="note-item">
+                        <h3>Competency Coverage</h3>
+                        <p><strong>Question 1:</strong> Competency 1 (Word Processing)<br>
+                        <strong>Question 2:</strong> Competency 2 (Spreadsheet Use)<br>
+                        <strong>Question 3:</strong> Competency 3 (Presentations)</p>
+                    </div>
+                    <div class="note-item">
+                        <h3>Total Marks</h3>
+                        <p>75 marks (3 × 25 marks per question)</p>
+                    </div>
+                    <div class="note-item">
+                        <h3>Time Allocation</h3>
+                        <p><strong>Question 1:</strong> 10-12 hours<br>
+                        <strong>Question 2:</strong> 10-12 hours<br>
+                        <strong>Question 3:</strong> 10-12 hours</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>Basic Computing - Practical Examination</strong></p>
+            <p>This examination assesses your competency in fundamental computing skills using industry-standard software applications.</p>
+            <p style="margin-top: 15px; opacity: 0.8;">Document prepared for educational assessment purposes | Print or save as PDF for easy sharing</p>
+        </div>
+    </div>
+</body>
+</html>
